@@ -1,19 +1,13 @@
 export const metadata = {
-  title: "Home - Full Stack Kit",
+  title: "Home | Sustainable Shopping",
   description:
-    "Full Stack Kit is a collection of prebuilt Full-Stack Web Development features and components with Next.js, to help you build your next project faster.",
+    "Sustainable Shopping is a platform dedicated to promoting eco-friendly products and practices, helping you make informed choices for a greener future.",
 };
-
-import PressLogos from "@/components/landing/press-logos";
-import CallToAction from "@/components/landing/call-to-action";
-import ColorfulHero from "@/components/landing/colorful-hero";
 
 export default async function Home() {
   return (
     <>
-      <ColorfulHero />
-      <PressLogos />
-      <CallToAction />
+      Homepage here!
     </>
   );
 }
