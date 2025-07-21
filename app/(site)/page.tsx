@@ -1,4 +1,4 @@
-import SearchBar from '@/components/landing/search-bar';
+import SearchBar from '@/components/ui/search-bar';
 
 export const metadata = {
   title: "Home | Sustainable Shopping",
@@ -8,7 +8,7 @@ export const metadata = {
 
 function BubbleItem({ text }: { text: string }) {
   return (
-    <div className="bg-gray-300 text-black p-3 rounded-lg shadow-sm text-sm">
+    <div className="bg-gray-200 text-black p-3 rounded-lg shadow-sm text-sm">
       {text}
     </div>
   );

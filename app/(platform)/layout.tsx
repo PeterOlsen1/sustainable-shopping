@@ -3,8 +3,7 @@ import PlatformNavigation from "@/components/navigation";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Full-Stack-Kit - Platform",
-  description: "Welcome to Full-Stack-Kit!",
+  title: "Sustainable Shopping",
 };
 
 interface Props {

@@ -27,12 +27,9 @@ interface Props {
 export default function DesktopProfileMenu({ user }: Props) {
   if (!user) return null;
 
-  const userRolesNames = user.roles.map((role) => role.role.name);
-
   return (
     <DropdownMenu>
-      {userRolesNames.includes(Role.ADMIN) && <Badge variant="destructive">admin</Badge>}
-      <span className="text-muted-foreground">{user?.name?.split(" ")[0]}</span>
+      <span>{user?.name?.split(" ")[0]}</span>
       <DropdownMenuTrigger asChild>
         <Avatar className="w-9 h-9">
           <span className="sr-only">Open user menu</span>

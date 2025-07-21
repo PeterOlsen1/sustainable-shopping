@@ -18,7 +18,7 @@ export default function CenteredResponsiveNavbar({ session }: Props) {
 
   const linkClasses = "font-medium hover:text-gray-500 px-1 py-2 flex items-center transition duration-150 ease-in-out"
   return (
-    <header className="relative w-full z-30 bg-gray-300 text-black py-2">
+    <header className="relative w-full z-30 bg-gray-200 text-black py-2">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-12">
           {/* Logo */}

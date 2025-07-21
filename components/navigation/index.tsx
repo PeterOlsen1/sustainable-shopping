@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Session } from "next-auth";
 import Image from "next/image";
+import SearchBar from "../ui/search-bar";
 
 import appConfig from "@/app/app.config";
 import { navigationRoutes } from "@/app/routes";
@@ -34,19 +35,17 @@ export default function PlatformNavigation({ session }: Props) {
   const filteredRoutes = filterRoutesBaseOnAuthenticationStatus(session);
 
   return (
-    <nav className="bg-gray-100 dark:bg-gray-950 ">
+    <nav className="bg-gray-200 dark:bg-gray-950 text-black p-2">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-14 items-center justify-between">
+        <div className="flex h-14 items-center justify-between gap-12">
           <div className="flex items-center">
             <Link href={appConfig.pages.home} className="flex-shrink-0 h-12 w-12">
-              <Image
-                src={appConfig.brand.logoUrl}
-                alt={appConfig.brand.appName}
-                width={100}
-                height={100}
-              />
+              Logo here!
             </Link>
-            <DesktopNavigation routes={filteredRoutes} />
+            {/* <DesktopNavigation routes={filteredRoutes} /> */}
+          </div>
+          <div className="flex-1">
+            <SearchBar type="item" className={"py-2"} />
           </div>
           <div className="flex gap-4">
             <div className="hidden md:block">
@@ -55,10 +54,6 @@ export default function PlatformNavigation({ session }: Props) {
                 <LoginButton session={session} visible={!session} />
               </div>
             </div>
-            <div className="-mr-2 flex md:hidden">
-              <MobileNavigationMenuPanel user={session?.user || null} routes={filteredRoutes} />
-            </div>
-            <ThemeModeToggle />
           </div>
         </div>
       </div>

@@ -75,7 +75,7 @@ export default function MobileNavigationMenuPanel({ user, routes }: Props) {
                   <div className="text-base font-medium leading-none dark:text-white">
                     {user?.name}
                   </div>
-                  <div className="text-sm font-medium leading-none mt-2 dark:text-gray-300">
+                  <div className="text-sm font-medium leading-none mt-2 dark:text-gray-200">
                     {user?.email}
                   </div>
                 </div>
