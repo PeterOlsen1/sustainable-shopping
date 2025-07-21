@@ -8,6 +8,7 @@ export interface AppConfig {
   };
 
   pages: {
+    index: string;
     home: string;
     about: string;
     contact: string;

@@ -9,7 +9,8 @@ const appConfig: AppConfig = {
   },
 
   pages: {
-    home: "/",
+    index: "/",
+    home: "/home",
     about: "/about",
     contact: "/contact",
     signin: "/signin",
