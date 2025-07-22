@@ -17,8 +17,8 @@ export default function SignInWithGoogle({
 
   return (
     <form action={() => signinWithGoogle({ redirectUrl })} className="w-full">
-      <Button className="w-full text-white bg-red-700 hover:bg-[#99092F]/90 focus:ring-4 focus:outline-none focus:ring-red-700/50 font-medium rounded-lg text-sm text-center inline-flex items-center dark:focus:ring-[#4285F4]/55">
-        <GoogleLogo />
+      <Button className="w-full text-white bg-black hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-red-700/50 font-medium rounded-lg text-sm text-center inline-flex items-center dark:focus:ring-[#4285F4]/55">
+        {/* <GoogleLogo /> */}
         <span className="w-full text-center">
           {buttonText || "Sign in with Google"}
         </span>

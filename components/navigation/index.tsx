@@ -16,6 +16,7 @@ import DesktopNavigation from "./desktop-navigation";
 import DesktopProfileMenu from "./desktop-profile-menu";
 import MobileNavigationMenuPanel from "./mobile-nav-menu-panel";
 import { CurrentUser } from "@/actions/users";
+import Logo from "../items/Logo";
 
 interface Props {
   session: Session | null;
@@ -43,11 +44,10 @@ export default function PlatformNavigation({ session }: Props) {
           <div className="flex items-center">
             <Link
               href={appConfig.pages.index}
-              className="flex-shrink-0 h-12 w-12"
+              className="flex-shrink-0"
             >
-              Logo here!
+              <Logo />
             </Link>
-            {/* <DesktopNavigation routes={filteredRoutes} /> */}
           </div>
           <div className="flex-1">
             <SearchBar type="item" className={"py-2"} />
