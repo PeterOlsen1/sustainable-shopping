@@ -8,30 +8,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import ClothingItem from "@/components/items/ClothingItem";
 
-//should probably type these later if i have time
-function SearchResultItem({ item }: any) {
-  const router = useRouter();
-
-  return (
-    <div className="bg-gray-200 rounded-lg shadow-md aspect-[4/3] flex items-center justify-center relative hover:[transform:scale(1.05)] transition-transform duration-200 cursor-pointer">
-      <Image
-        src={item.image}
-        alt={item.name}
-        fill
-        className="object-cover rounded-lg"
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        onClick={() => {
-          router.push(`/items/ITEM_ID`);
-        }}
-      />
-      <div className="absolute bottom-2 left-2 bg-white px-3 py-1 rounded text-sm shadow hover:bg-gray-100" onClick={() => {
-        router.push(`/brands/${item.brand}`);
-      }}>
-        {item.brand}
-      </div>
-    </div>
-  );
-}
 
 function FilterOption({ option, filters, setFilters }: { option: FilterOptionType, filters: any, setFilters: any }) {
   const [expanded, setExpanded] = useState(false);
@@ -44,8 +20,27 @@ function FilterOption({ option, filters, setFilters }: { option: FilterOptionTyp
         className="flex w-full cursor-pointer"
         onClick={() => setExpanded(!expanded)}
       >
-        <div className="flex-1 text-left">{option.label}</div>
-        <div className="select-none">{expanded ? "-" : "+"}</div>
+        <div className="flex-1 flex gap-2 text-left items-center">
+          <div>
+            {option.label}
+          </div>
+          <div className="text-[#767676] text-sm">
+            {filters[option.filterKey]?.length > 0
+              ? ` (${filters[option.filterKey].length})`
+              : 'All'}
+          </div>
+        </div>
+        <div className="select-none">
+          {expanded ? 
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <line x1="16" y1="10" x2="4" y2="10" stroke="#1D1D1D"/>
+              </svg> : 
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <line x1="10" y1="4" x2="10" y2="16" stroke="#1D1D1D"/>
+                <line x1="16" y1="10" x2="4" y2="10" stroke="#1D1D1D"/>
+              </svg>
+          }
+        </div>
       </div>
       {expanded && (
         <div
@@ -193,14 +188,16 @@ export default function SearchItemPage() {
 
   return (
     <div className="w-[80%] mr-auto ml-auto mt-16 min-h-screen grid grid-cols-[1fr_3fr] gap-8" >
-      <div className="bg-gray-200 p-6 rounded-lg shadow-md flex flex-col gap-4">
-        <strong>Filter by</strong>
+      <div className="rounded-lg flex flex-col gap-4">
+        <div className="font-[500] text-xl">
+          Filter by
+        </div>
         <div className="divide-y divide-gray-300 flex flex-col">
           {filterOptions.map((option) => (
             <FilterOption key={option.label} option={option} filters={filters} setFilters={setFilters} />
           ))}
         </div>
-        <button onClick={removeFilters} className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 transition-colors">
+        <button onClick={removeFilters} className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors">
           Clear filters
         </button>
       </div>
@@ -232,9 +229,13 @@ export default function SearchItemPage() {
         </div>
         <div className="grid grid-cols-3 gap-4">
           {displayedResults.map((result, index) => (
-            // <SearchResultItem item={result} key={index} />
             <ClothingItem item={result} key={index} />
           ))}
+          {displayedResults.length === 0 && (
+            <div className="col-span-3 text-center text-gray-500 h-32 grid place-items-center">
+              No results found!
+            </div>
+          )}
         </div>
       </div>
     </div>
