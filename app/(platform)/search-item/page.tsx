@@ -5,9 +5,13 @@ import { useFilters, defaultFilters } from "./useFilters";
 import type { FilterOption as FilterOptionType } from "./constants";
 import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import ClothingItem from "@/components/items/ClothingItem";
 
 //should probably type these later if i have time
 function SearchResultItem({ item }: any) {
+  const router = useRouter();
+
   return (
     <div className="bg-gray-200 rounded-lg shadow-md aspect-[4/3] flex items-center justify-center relative hover:[transform:scale(1.05)] transition-transform duration-200 cursor-pointer">
       <Image
@@ -16,8 +20,13 @@ function SearchResultItem({ item }: any) {
         fill
         className="object-cover rounded-lg"
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        onClick={() => {
+          router.push(`/items/ITEM_ID`);
+        }}
       />
-      <div className="absolute bottom-2 left-2 bg-white px-3 py-1 rounded text-sm shadow">
+      <div className="absolute bottom-2 left-2 bg-white px-3 py-1 rounded text-sm shadow hover:bg-gray-100" onClick={() => {
+        router.push(`/brands/${item.brand}`);
+      }}>
         {item.brand}
       </div>
     </div>
@@ -183,7 +192,7 @@ export default function SearchItemPage() {
   }, []);
 
   return (
-    <div className="w-[80%] mr-auto ml-auto mt-16 h-screen grid grid-cols-[1fr_3fr] gap-8" >
+    <div className="w-[80%] mr-auto ml-auto mt-16 min-h-screen grid grid-cols-[1fr_3fr] gap-8" >
       <div className="bg-gray-200 p-6 rounded-lg shadow-md flex flex-col gap-4">
         <strong>Filter by</strong>
         <div className="divide-y divide-gray-300 flex flex-col">
@@ -223,7 +232,8 @@ export default function SearchItemPage() {
         </div>
         <div className="grid grid-cols-3 gap-4">
           {displayedResults.map((result, index) => (
-            <SearchResultItem item={result} key={index} />
+            // <SearchResultItem item={result} key={index} />
+            <ClothingItem item={result} key={index} />
           ))}
         </div>
       </div>
