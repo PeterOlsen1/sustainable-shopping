@@ -1,8 +1,9 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { filterOptions } from "./constants";
+import { useFilters, defaultFilters } from "./useFilters";
 import type { FilterOption as FilterOptionType } from "./constants";
-import { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 
 //should probably type these later if i have time
@@ -23,8 +24,9 @@ function SearchResultItem({ item }: any) {
   );
 }
 
-function FilterOption({ option }: { option: FilterOptionType }) {
+function FilterOption({ option, filters, setFilters }: { option: FilterOptionType, filters: any, setFilters: any }) {
   const [expanded, setExpanded] = useState(false);
+
   return (
     <div
       className={`w-full flex flex-col items-center text-center py-3 height-auto`}
@@ -54,7 +56,27 @@ function FilterOption({ option }: { option: FilterOptionType }) {
                 maxWidth: "100%",
               }}
             >
-              <input type="checkbox" id={`filter-${option.label}-${index}`} />
+              <input type="checkbox" id={`filter-${option.label}-${index}`} 
+                onClick={(e: any) => {
+                  setFilters((prev: any) => {
+                    const filterKey = option.filterKey; // Convert to lowercase to match your item properties
+
+                    if (e.target.checked) {
+                      // Add the option to the filter array for this category
+                      return {
+                        ...prev,
+                        [filterKey]: [...prev[filterKey], opt]
+                      };
+                    } else {
+                      // Remove the option from the filter array for this category
+                      return {
+                        ...prev,
+                        [filterKey]: prev[filterKey] ? prev[filterKey].filter(val => val !== opt) : []
+                      };
+                    }
+                  });
+                }}
+              />
               <label
                 htmlFor={`filter-${option.label}-${index}`}
                 style={{
@@ -91,7 +113,7 @@ export default function SearchItemPage() {
     occasion: "Casual",
   };
 
-  const results = [
+  const [results, setResults] = useState([
     testShirt,
     testShirt,
     testShirt,
@@ -113,23 +135,47 @@ export default function SearchItemPage() {
       material: "Linen",
       occasion: "Formal",
     },
-  ];
+  ]);
 
-  const [displayedResults, setDisplayedResults] = useState(results);
+  const { filters, setFilters } = useFilters();
+  const displayedResults = useMemo(() => {
+    console.log(filters);
+    return results.filter((item) => {
+      // Check if item matches ALL active filters
+      return Object.entries(filters).every(([key, filterValues]) => {
+        const itemProperty = item[key as keyof typeof item];
+        
+        // If no filters are selected for this category, or "All" is selected, include the item
+        if (!filterValues || filterValues.length === 0 || filterValues.includes("All")) {
+          return true;
+        }
+        
+        // Check if item's property matches any of the selected filter values
+        return filterValues.includes(itemProperty);
+      });
+    });
+  }, [results, filters]);
 
   function sortByPriceLowToHigh() {
-    console.log("sorting!");
     const sortedResults = [...displayedResults].sort(
       (a, b) => a.price - b.price,
     );
-    setDisplayedResults(sortedResults);
+    setResults(sortedResults);
   }
 
   function sortByPriceHighToLow() {
     const sortedResults = [...displayedResults].sort(
       (a, b) => b.price - a.price,
     );
-    setDisplayedResults(sortedResults);
+    setResults(sortedResults);
+  }
+
+  function removeFilters() {
+    //bad + quick solution
+    document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+      (checkbox as HTMLInputElement).checked = false;
+    });
+    setFilters(defaultFilters);
   }
 
   useEffect(() => {
@@ -137,19 +183,22 @@ export default function SearchItemPage() {
   }, []);
 
   return (
-    <div className="w-[80%] mr-auto ml-auto mt-16 h-screen grid grid-cols-[1fr_3fr] gap-8">
+    <div className="w-[80%] mr-auto ml-auto mt-16 h-screen grid grid-cols-[1fr_3fr] gap-8" >
       <div className="bg-gray-200 p-6 rounded-lg shadow-md flex flex-col gap-4">
         <strong>Filter by</strong>
         <div className="divide-y divide-gray-300 flex flex-col">
           {filterOptions.map((option) => (
-            <FilterOption key={option.label} option={option} />
+            <FilterOption key={option.label} option={option} filters={filters} setFilters={setFilters} />
           ))}
         </div>
+        <button onClick={removeFilters} className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 transition-colors">
+          Clear filters
+        </button>
       </div>
       <div className="w-full flex flex-col gap-4">
         <div className="flex gap-4 justify-center items-center">
           <strong className="text-[1.75em]">&quot;{query}&quot;</strong>
-          <div className="flex-1">315 results</div>
+          <div className="flex-1">{displayedResults.length} result{displayedResults.length !== 1 ? "s" : ""}</div>
           <div>
             <select
               name="sort"
@@ -173,7 +222,7 @@ export default function SearchItemPage() {
           </div>
         </div>
         <div className="grid grid-cols-3 gap-4">
-          {results.map((result, index) => (
+          {displayedResults.map((result, index) => (
             <SearchResultItem item={result} key={index} />
           ))}
         </div>
