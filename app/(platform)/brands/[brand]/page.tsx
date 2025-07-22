@@ -9,7 +9,9 @@ export default function BrandPage({ params }: { params: { brand: string } }) {
   const router = useRouter();
   const brand = params.brand;
 
-  const [shownItems, setShownItems] = useState([1, 2, 3, 4, 5, 6, 7, 8, 11, 9, 10]);
+  const [shownItems, setShownItems] = useState([
+    1, 2, 3, 4, 5, 6, 7, 8, 11, 9, 10,
+  ]);
 
   return (
     <div className="flex flex-col gap-8 min-h-screen w-screen mt-12 w-[90%] mx-auto">
@@ -22,9 +24,7 @@ export default function BrandPage({ params }: { params: { brand: string } }) {
         <div className="flex flex-col gap-8">
           <TopCard brand={brand} />
           <div className="flex gap-6 items-center">
-            <div className="text-3xl font-[500]">
-              Available products
-            </div>
+            <div className="text-3xl font-[500]">Available products</div>
             <div className="text-[1.25rem] text-[#767676]">
               {shownItems.length} results
             </div>
@@ -45,5 +45,5 @@ export default function BrandPage({ params }: { params: { brand: string } }) {
         </div>
       </div>
     </div>
-  )
+  );
 }

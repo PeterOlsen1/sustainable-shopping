@@ -8,8 +8,15 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import ClothingItem from "@/components/items/ClothingItem";
 
-
-function FilterOption({ option, filters, setFilters }: { option: FilterOptionType, filters: any, setFilters: any }) {
+function FilterOption({
+  option,
+  filters,
+  setFilters,
+}: {
+  option: FilterOptionType;
+  filters: any;
+  setFilters: any;
+}) {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -21,25 +28,36 @@ function FilterOption({ option, filters, setFilters }: { option: FilterOptionTyp
         onClick={() => setExpanded(!expanded)}
       >
         <div className="flex-1 flex gap-2 text-left items-center">
-          <div>
-            {option.label}
-          </div>
+          <div>{option.label}</div>
           <div className="text-[#767676] text-sm">
             {filters[option.filterKey]?.length > 0
               ? ` (${filters[option.filterKey].length})`
-              : 'All'}
+              : "All"}
           </div>
         </div>
         <div className="select-none">
-          {expanded ? 
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <line x1="16" y1="10" x2="4" y2="10" stroke="#1D1D1D"/>
-              </svg> : 
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <line x1="10" y1="4" x2="10" y2="16" stroke="#1D1D1D"/>
-                <line x1="16" y1="10" x2="4" y2="10" stroke="#1D1D1D"/>
-              </svg>
-          }
+          {expanded ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+            >
+              <line x1="16" y1="10" x2="4" y2="10" stroke="#1D1D1D" />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+            >
+              <line x1="10" y1="4" x2="10" y2="16" stroke="#1D1D1D" />
+              <line x1="16" y1="10" x2="4" y2="10" stroke="#1D1D1D" />
+            </svg>
+          )}
         </div>
       </div>
       {expanded && (
@@ -60,7 +78,9 @@ function FilterOption({ option, filters, setFilters }: { option: FilterOptionTyp
                 maxWidth: "100%",
               }}
             >
-              <input type="checkbox" id={`filter-${option.label}-${index}`} 
+              <input
+                type="checkbox"
+                id={`filter-${option.label}-${index}`}
                 onClick={(e: any) => {
                   setFilters((prev: any) => {
                     const filterKey = option.filterKey; // Convert to lowercase to match your item properties
@@ -69,13 +89,15 @@ function FilterOption({ option, filters, setFilters }: { option: FilterOptionTyp
                       // Add the option to the filter array for this category
                       return {
                         ...prev,
-                        [filterKey]: [...prev[filterKey], opt]
+                        [filterKey]: [...prev[filterKey], opt],
                       };
                     } else {
                       // Remove the option from the filter array for this category
                       return {
                         ...prev,
-                        [filterKey]: prev[filterKey] ? prev[filterKey].filter(val => val !== opt) : []
+                        [filterKey]: prev[filterKey]
+                          ? prev[filterKey].filter((val) => val !== opt)
+                          : [],
                       };
                     }
                   });
@@ -148,12 +170,16 @@ export default function SearchItemPage() {
       // Check if item matches ALL active filters
       return Object.entries(filters).every(([key, filterValues]) => {
         const itemProperty = item[key as keyof typeof item];
-        
+
         // If no filters are selected for this category, or "All" is selected, include the item
-        if (!filterValues || filterValues.length === 0 || filterValues.includes("All")) {
+        if (
+          !filterValues ||
+          filterValues.length === 0 ||
+          filterValues.includes("All")
+        ) {
           return true;
         }
-        
+
         // Check if item's property matches any of the selected filter values
         return filterValues.includes(itemProperty);
       });
@@ -187,24 +213,33 @@ export default function SearchItemPage() {
   }, []);
 
   return (
-    <div className="w-[80%] mr-auto ml-auto mt-16 min-h-screen grid grid-cols-[1fr_3fr] gap-8" >
+    <div className="w-[80%] mr-auto ml-auto mt-16 min-h-screen grid grid-cols-[1fr_3fr] gap-8">
       <div className="rounded-lg flex flex-col gap-4">
-        <div className="font-[500] text-xl">
-          Filter by
-        </div>
+        <div className="font-[500] text-xl">Filter by</div>
         <div className="divide-y divide-gray-300 flex flex-col">
           {filterOptions.map((option) => (
-            <FilterOption key={option.label} option={option} filters={filters} setFilters={setFilters} />
+            <FilterOption
+              key={option.label}
+              option={option}
+              filters={filters}
+              setFilters={setFilters}
+            />
           ))}
         </div>
-        <button onClick={removeFilters} className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors">
+        <button
+          onClick={removeFilters}
+          className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors"
+        >
           Clear filters
         </button>
       </div>
       <div className="w-full flex flex-col gap-4">
         <div className="flex gap-4 justify-center items-center">
           <strong className="text-[1.75em]">&quot;{query}&quot;</strong>
-          <div className="flex-1">{displayedResults.length} result{displayedResults.length !== 1 ? "s" : ""}</div>
+          <div className="flex-1">
+            {displayedResults.length} result
+            {displayedResults.length !== 1 ? "s" : ""}
+          </div>
           <div>
             <select
               name="sort"
