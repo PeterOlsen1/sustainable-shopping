@@ -16,7 +16,8 @@ interface Props {
 export default function CenteredResponsiveNavbar({ session }: Props) {
   const router = useRouter();
 
-  const linkClasses = "font-medium hover:text-gray-500 px-1 py-2 flex items-center transition duration-150 ease-in-out"
+  const linkClasses =
+    "font-medium hover:text-gray-500 px-1 py-2 flex items-center transition duration-150 ease-in-out";
   return (
     <header className="relative w-full z-30 bg-gray-200 text-black py-2">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -47,7 +48,9 @@ export default function CenteredResponsiveNavbar({ session }: Props) {
             {/* <ThemeModeToggle /> */}
             <Link
               className="font-medium text-sm p-2 px-4 rounded-full bg-black text-white hover:bg-gray-600 whitespace-nowrap transition duration-250 ease-in-out"
-              href={session ? appConfig.pages.dashboard : appConfig.pages.signin}
+              href={
+                session ? appConfig.pages.dashboard : appConfig.pages.signin
+              }
             >
               {session ? "Home" : "Sign in"}
             </Link>

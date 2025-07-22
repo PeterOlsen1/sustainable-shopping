@@ -7,7 +7,11 @@ interface Props extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   onClick?: () => void;
 }
 
-export default function BackLink({ href, onClick, children }: PropsWithChildren<Props>) {
+export default function BackLink({
+  href,
+  onClick,
+  children,
+}: PropsWithChildren<Props>) {
   if (onClick) {
     return (
       <button

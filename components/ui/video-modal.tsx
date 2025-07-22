@@ -58,7 +58,11 @@ export default function VideoModal({
         </svg>
       </button>
 
-      <Transition show={modalOpen} as={Fragment} afterEnter={() => videoRef.current?.play()}>
+      <Transition
+        show={modalOpen}
+        as={Fragment}
+        afterEnter={() => videoRef.current?.play()}
+      >
         <Dialog initialFocus={videoRef} onClose={() => setModalOpen(false)}>
           <Transition.Child
             className="fixed inset-0 z-10 bg-indigo-600 bg-opacity-80 transition-opacity"
@@ -82,7 +86,12 @@ export default function VideoModal({
           >
             <div className="max-w-7xl mx-auto h-full flex items-center">
               <Dialog.Panel className="w-full max-h-full rounded-3xl shadow-2xl aspect-video border-8 border-indigo-900 overflow-hidden">
-                <video ref={videoRef} width={videoWidth} height={videoHeight} controls>
+                <video
+                  ref={videoRef}
+                  width={videoWidth}
+                  height={videoHeight}
+                  controls
+                >
                   <source src={video} />
                   Your browser does not support the video tag.
                 </video>

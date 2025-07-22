@@ -7,15 +7,18 @@ interface Props {
   as?: React.ElementType;
 }
 
-export default forwardRef<HTMLDivElement, PropsWithChildren<Props>>(function FlexCol(
-  { as, children, className, style },
-  ref
-) {
-  const Component = as || "div";
+export default forwardRef<HTMLDivElement, PropsWithChildren<Props>>(
+  function FlexCol({ as, children, className, style }, ref) {
+    const Component = as || "div";
 
-  return (
-    <Component className={clsx(`gap-4 flex`, className)} style={style} ref={ref}>
-      {children}
-    </Component>
-  );
-});
+    return (
+      <Component
+        className={clsx(`gap-4 flex`, className)}
+        style={style}
+        ref={ref}
+      >
+        {children}
+      </Component>
+    );
+  },
+);

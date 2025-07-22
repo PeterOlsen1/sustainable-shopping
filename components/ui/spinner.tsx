@@ -12,7 +12,11 @@ const sizeMap = {
   lg: "w-8 h-8",
 };
 
-export default function Spinner({ visible = true, size = "lg", className }: Props) {
+export default function Spinner({
+  visible = true,
+  size = "lg",
+  className,
+}: Props) {
   if (!visible) return null;
 
   return (
@@ -21,7 +25,7 @@ export default function Spinner({ visible = true, size = "lg", className }: Prop
         aria-hidden="true"
         className={clsx(
           "text-gray-200 animate-spin dark:text-gray-600 fill-blue-400",
-          sizeMap[size]
+          sizeMap[size],
         )}
         viewBox="0 0 100 101"
         fill="none"

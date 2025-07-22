@@ -9,8 +9,14 @@ import prisma from "@/lib/prisma";
 import appConfig from "@/app/app.config";
 
 const ValidationSchema = z.object({
-  firstName: z.string().trim().min(2, "First name must be at least 2 characters long!"),
-  lastName: z.string().trim().min(2, "Last name must be at least 2 characters long!"),
+  firstName: z
+    .string()
+    .trim()
+    .min(2, "First name must be at least 2 characters long!"),
+  lastName: z
+    .string()
+    .trim()
+    .min(2, "Last name must be at least 2 characters long!"),
 });
 
 export async function updateProfile(data: z.infer<typeof ValidationSchema>) {

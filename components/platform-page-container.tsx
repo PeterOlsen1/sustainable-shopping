@@ -21,9 +21,14 @@ export default function PlatformPageContainer({
 
   return (
     <Fragment>
-      <PlatformPageHeader visible={Boolean(pageHeaderTitle)}>{pageHeaderTitle}</PlatformPageHeader>
+      <PlatformPageHeader visible={Boolean(pageHeaderTitle)}>
+        {pageHeaderTitle}
+      </PlatformPageHeader>
       <Component
-        className={cn("max-w-7xl mx-auto px-4 py-6 lg:py-12 sm:px-6 lg:px-8", className)}
+        className={cn(
+          "max-w-7xl mx-auto px-4 py-6 lg:py-12 sm:px-6 lg:px-8",
+          className,
+        )}
         style={style}
       >
         {children}

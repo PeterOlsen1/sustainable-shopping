@@ -29,7 +29,9 @@ async function seedData() {
     if (i === 0) rolesToCreate.push({ role: { connect: { name: "admin" } } });
 
     await prisma.user.upsert({
-      where: { email: `${i === 0 ? "admin" : "user"}${i === 0 ? "" : i}@example.com` },
+      where: {
+        email: `${i === 0 ? "admin" : "user"}${i === 0 ? "" : i}@example.com`,
+      },
       update: {},
       create: {
         email: `${i === 0 ? "admin" : "user"}${i === 0 ? "" : i}@example.com`,

@@ -22,6 +22,13 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "scripts/set-admin.js", "lib/github/grant-repo-access.mjs"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "scripts/set-admin.js",
+    "lib/github/grant-repo-access.mjs"
+  ],
   "exclude": ["node_modules"]
 }

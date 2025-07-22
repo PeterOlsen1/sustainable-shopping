@@ -10,7 +10,7 @@ type Props<T extends ElementType> = {
 
 const FlexRow = forwardRef<HTMLElement, Props<ElementType>>(function FlexCol(
   { as: Component = "div", children, className, style, ...props },
-  ref
+  ref,
 ) {
   return (
     <Component

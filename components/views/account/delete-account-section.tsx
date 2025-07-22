@@ -58,10 +58,19 @@ export default function DeleteMyAccount({ user, visible = true }: Props) {
         <AlertDialog>
           <AlertDialogTrigger>
             <div className="w-full">
-              <Button className="w-full" variant="destructive" visible={!isDeleting}>
+              <Button
+                className="w-full"
+                variant="destructive"
+                visible={!isDeleting}
+              >
                 Delete my account
               </Button>
-              <Button className="w-full" variant="destructive" visible={isDeleting} disabled>
+              <Button
+                className="w-full"
+                variant="destructive"
+                visible={isDeleting}
+                disabled
+              >
                 <Spinner size="sm" className="mr-2" /> Deleting...
               </Button>
             </div>
@@ -70,13 +79,16 @@ export default function DeleteMyAccount({ user, visible = true }: Props) {
             <AlertDialogHeader>
               <AlertDialogTitle>Are you really sure?</AlertDialogTitle>
               <AlertDialogDescription>
-                Clicking &quot;Delete my account&quot; will permanently delete your account and
-                remove your data from our servers. This action is irreversible
+                Clicking &quot;Delete my account&quot; will permanently delete
+                your account and remove your data from our servers. This action
+                is irreversible
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={handleDeleteAccount}>Delete my account</AlertDialogAction>
+              <AlertDialogAction onClick={handleDeleteAccount}>
+                Delete my account
+              </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>

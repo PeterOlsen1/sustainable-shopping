@@ -1,7 +1,9 @@
 import { navigationRoutes } from "@/app/routes";
 import { NavigationRoute } from "@/lib/types";
 
-export function findRouteObjectByPathname(pathname: string): NavigationRoute | undefined {
+export function findRouteObjectByPathname(
+  pathname: string,
+): NavigationRoute | undefined {
   const routeObject = navigationRoutes.find((route) => {
     const { children, path } = route;
     if (children) {

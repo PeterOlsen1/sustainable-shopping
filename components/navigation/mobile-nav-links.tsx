@@ -18,10 +18,13 @@ export default function MobileNavLink({ href, children, onClick }: Props) {
     <Button
       variant={"ghost"}
       onClick={onClick}
-      className={cn("block w-full text-left rounded-md px-3 py-2 text-base font-medium", {
-        "bg-gray-900 text-white": isCurrent,
-        "hover:bg-gray-700 hover:text-white": !isCurrent,
-      })}
+      className={cn(
+        "block w-full text-left rounded-md px-3 py-2 text-base font-medium",
+        {
+          "bg-gray-900 text-white": isCurrent,
+          "hover:bg-gray-700 hover:text-white": !isCurrent,
+        },
+      )}
     >
       {children}
     </Button>

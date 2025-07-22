@@ -8,14 +8,20 @@ interface Props extends ComponentProps<typeof Button> {
   redirectUrl?: string;
 }
 
-export default function SignInWithGoogle({ visible = true, buttonText, redirectUrl }: Props) {
+export default function SignInWithGoogle({
+  visible = true,
+  buttonText,
+  redirectUrl,
+}: Props) {
   if (!visible) return null;
 
   return (
     <form action={() => signinWithGoogle({ redirectUrl })} className="w-full">
       <Button className="w-full text-white bg-red-700 hover:bg-[#99092F]/90 focus:ring-4 focus:outline-none focus:ring-red-700/50 font-medium rounded-lg text-sm text-center inline-flex items-center dark:focus:ring-[#4285F4]/55">
         <GoogleLogo />
-        <span className="w-full text-center">{buttonText || "Sign in with Google"}</span>
+        <span className="w-full text-center">
+          {buttonText || "Sign in with Google"}
+        </span>
       </Button>
     </form>
   );
@@ -34,7 +40,9 @@ export function DisconnectGoogleAccount({
       onClick={onClick}
     >
       <GoogleLogo />
-      <span className="w-full text-center">{buttonText || "Disconnect Google Account"}</span>
+      <span className="w-full text-center">
+        {buttonText || "Disconnect Google Account"}
+      </span>
     </Button>
   );
 }

@@ -23,7 +23,9 @@ export async function isUserLoggedIn() {
   return userIsLoggedIn;
 }
 
-export async function signinWithGoogle({ redirectUrl }: SignInButtonProps = {}) {
+export async function signinWithGoogle({
+  redirectUrl,
+}: SignInButtonProps = {}) {
   return signIn("google", {
     redirectTo: redirectUrl || appConfig.pages.dashboard,
   });

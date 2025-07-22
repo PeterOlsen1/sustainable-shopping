@@ -66,7 +66,7 @@ export function DataTable<TData, TValue>({
     const { totalPages, pageIndex } = pagination;
     if (totalPages == null || pageIndex == null) {
       throw new Error(
-        "Both totalPages and pageIndex must be provided when using manual pagination."
+        "Both totalPages and pageIndex must be provided when using manual pagination.",
       );
     }
     tableState.pagination = {
@@ -77,7 +77,9 @@ export function DataTable<TData, TValue>({
 
   if (search?.autoSearch) {
     if (search.autoSearchColumnKey == null) {
-      throw new Error("autoSearchColumnKey must be provided when using auto search.");
+      throw new Error(
+        "autoSearchColumnKey must be provided when using auto search.",
+      );
     }
     if (!columns.find((column) => column.id === search.autoSearchColumnKey)) {
       throw new Error("autoSearchColumnKey must be a valid column key.");
@@ -118,13 +120,19 @@ export function DataTable<TData, TValue>({
         <Table>
           <TableHeader className="bg-secondary">
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className="border border-secondary">
+              <TableRow
+                key={headerGroup.id}
+                className="border border-secondary"
+              >
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead key={header.id}>
                       {header.isPlaceholder
                         ? null
-                        : flexRender(header.column.columnDef.header, header.getContext())}
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext(),
+                          )}
                     </TableHead>
                   );
                 })}
@@ -141,14 +149,20 @@ export function DataTable<TData, TValue>({
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
                     </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
                   No results.
                 </TableCell>
               </TableRow>
@@ -157,8 +171,14 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
       <div className="my-4" />
-      <DataTableAutoPagination table={table} visible={!pagination?.manualPagination} />
-      <DataTableManualPagination table={table} visible={pagination?.manualPagination} />
+      <DataTableAutoPagination
+        table={table}
+        visible={!pagination?.manualPagination}
+      />
+      <DataTableManualPagination
+        table={table}
+        visible={pagination?.manualPagination}
+      />
     </div>
   );
 }

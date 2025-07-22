@@ -30,7 +30,8 @@ const features = [
   },
   {
     name: "Admin Panel",
-    description: "Admin panel to manage users, roles, permissions, announcement banners, and more.",
+    description:
+      "Admin panel to manage users, roles, permissions, announcement banners, and more.",
     Icon: () => (
       <div className="text-blue-500 bg-blue-100 md:p-4 rounded-lg">
         <Squares2X2Icon className="w-6 h-6" />

@@ -23,7 +23,9 @@ export default function DataTableAutoSearchInput<TData>({
       type="search"
       placeholder={placeholder || `Search by ${columnKey}...`}
       value={(table.getColumn(columnKey)?.getFilterValue() as string) ?? ""}
-      onChange={(event) => table.getColumn(columnKey)?.setFilterValue(event.target.value)}
+      onChange={(event) =>
+        table.getColumn(columnKey)?.setFilterValue(event.target.value)
+      }
       className="max-w-sm"
     />
   );

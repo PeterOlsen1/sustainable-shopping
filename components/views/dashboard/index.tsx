@@ -33,7 +33,8 @@ const features = [
   },
   {
     name: "Admin Panel",
-    description: "Admin panel to manage users, roles, permissions, announcement banners, and more.",
+    description:
+      "Admin panel to manage users, roles, permissions, announcement banners, and more.",
     Icon: () => (
       <div className="text-blue-500 bg-blue-100 md:p-4 rounded-lg">
         <Squares2X2Icon className="w-6 h-6" />
@@ -81,9 +82,10 @@ export default function DashboardView({ user }: Props) {
     <div className="w-7xl max-w-full mx-auto">
       <h1 className="text-xl font-bold mb-2">Howdy, {user?.name}</h1>
       <p className="mb-6 text-secondary-foreground">
-        This is where you would implement the dashboard of your app. <strong>Full Stack Kit</strong>{" "}
-        allows you to focus on the main logic of your app to ship 3x faster. All the following time
-        consuming features are already implemented for you:
+        This is where you would implement the dashboard of your app.{" "}
+        <strong>Full Stack Kit</strong> allows you to focus on the main logic of
+        your app to ship 3x faster. All the following time consuming features
+        are already implemented for you:
       </p>
       <Separator className="my-6" />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -98,10 +100,10 @@ export default function DashboardView({ user }: Props) {
         ))}
       </div>
       <div className="my-4 text-xl">
-        You also get a lot of UI components and sections, utility functions, reusable logics and
-        design patterns to help you build your app at the speed of light while keeping the quality
-        high and the codebase clean. Also a vibrant discord community to help you out when you need
-        help.
+        You also get a lot of UI components and sections, utility functions,
+        reusable logics and design patterns to help you build your app at the
+        speed of light while keeping the quality high and the codebase clean.
+        Also a vibrant discord community to help you out when you need help.
       </div>
       <Separator className="my-6" />
       <a href="https://docs.full-stack-kit.dev/" target="_blank">

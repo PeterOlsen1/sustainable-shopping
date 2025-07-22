@@ -12,7 +12,7 @@ export function getProviders(config: typeof appConfig) {
         clientId: providersConfig.google.clientId,
         clientSecret: providersConfig.google.clientSecret,
         allowDangerousEmailAccountLinking: true,
-      })
+      }),
     );
   }
 

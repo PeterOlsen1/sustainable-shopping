@@ -21,7 +21,9 @@ interface Props {
   session: Session | null;
 }
 
-function filterRoutesBaseOnAuthenticationStatus(session: Session | null): typeof navigationRoutes {
+function filterRoutesBaseOnAuthenticationStatus(
+  session: Session | null,
+): typeof navigationRoutes {
   return navigationRoutes.filter((route) => {
     const routeRoles = route.roles as Role[];
     if (!route.protected) return true;
@@ -39,7 +41,10 @@ export default function PlatformNavigation({ session }: Props) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-14 items-center justify-between gap-12">
           <div className="flex items-center">
-            <Link href={appConfig.pages.index} className="flex-shrink-0 h-12 w-12">
+            <Link
+              href={appConfig.pages.index}
+              className="flex-shrink-0 h-12 w-12"
+            >
               Logo here!
             </Link>
             {/* <DesktopNavigation routes={filteredRoutes} /> */}

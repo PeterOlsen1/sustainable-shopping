@@ -5,12 +5,25 @@ import * as SeparatorPrimitive from "@radix-ui/react-separator";
 
 import { cn } from "@/lib/utils/tailwind";
 
-interface Props extends React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root> {
+interface Props
+  extends React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root> {
   visible?: boolean;
 }
 
-const Separator = React.forwardRef<React.ElementRef<typeof SeparatorPrimitive.Root>, Props>(
-  ({ className, orientation = "horizontal", visible = true, decorative = true, ...props }, ref) => (
+const Separator = React.forwardRef<
+  React.ElementRef<typeof SeparatorPrimitive.Root>,
+  Props
+>(
+  (
+    {
+      className,
+      orientation = "horizontal",
+      visible = true,
+      decorative = true,
+      ...props
+    },
+    ref,
+  ) => (
     <SeparatorPrimitive.Root
       ref={ref}
       decorative={decorative}
@@ -18,11 +31,11 @@ const Separator = React.forwardRef<React.ElementRef<typeof SeparatorPrimitive.Ro
       className={cn(
         "shrink-0 bg-border",
         orientation === "horizontal" ? "h-[1px] w-full" : "h-full w-[1px]",
-        className
+        className,
       )}
       {...props}
     />
-  )
+  ),
 );
 Separator.displayName = SeparatorPrimitive.Root.displayName;
 

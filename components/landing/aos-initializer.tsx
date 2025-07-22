@@ -10,7 +10,11 @@ import { useEffect } from "react";
  * @see https://michalsnik.github.io/aos/
  */
 
-export default function AosInitializer({ children }: { children: React.ReactNode }) {
+export default function AosInitializer({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   useEffect(() => {
     AOS.init({
       once: true,

@@ -10,12 +10,24 @@ type Props<T extends ElementType> = {
 } & React.ComponentProps<T>;
 
 const FlexCol = forwardRef<HTMLElement, Props<ElementType>>(function FlexCol(
-  { as: Component = "div", visible = true, children, className, style, ...props },
-  ref
+  {
+    as: Component = "div",
+    visible = true,
+    children,
+    className,
+    style,
+    ...props
+  },
+  ref,
 ) {
   if (!visible) return null;
   return (
-    <Component className={cn(`flex flex-col gap-4`, className)} style={style} ref={ref} {...props}>
+    <Component
+      className={cn(`flex flex-col gap-4`, className)}
+      style={style}
+      ref={ref}
+      {...props}
+    >
       {children}
     </Component>
   );

@@ -19,12 +19,14 @@ export default function ProfileInformationForm({ user }: Props) {
   const [userData, setUserData] = useState<Partial<CurrentUser> | null>(user);
   const [message, setMessage] = useState<string | null>(null);
   const [responseStatus, setResponseStatus] = useState<ActionResponseStatus>(
-    ActionResponseStatus.IDLE
+    ActionResponseStatus.IDLE,
   );
 
   const [defaultFirstName, defaultLastName] = userData?.name?.split(" ") || [];
 
-  const handleUpdateProfile = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleUpdateProfile = async (
+    event: React.FormEvent<HTMLFormElement>,
+  ) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const firstName = formData.get("firstName");
@@ -50,9 +52,15 @@ export default function ProfileInformationForm({ user }: Props) {
     <Flex className="gap-8 md:gap-36 flex-col lg:flex-row">
       <FlexCol className="max-w-xs">
         <h3 className="text-lg text-primary">Profile Information</h3>
-        <p className="text-secondary-foreground">Basic info, like your name email and avatar.</p>
+        <p className="text-secondary-foreground">
+          Basic info, like your name email and avatar.
+        </p>
       </FlexCol>
-      <FlexCol as="form" onSubmit={handleUpdateProfile} className="max-w-xl w-full">
+      <FlexCol
+        as="form"
+        onSubmit={handleUpdateProfile}
+        className="max-w-xl w-full"
+      >
         <Avatar>
           <AvatarImage src={user?.image || undefined} alt="@shadcn" />
           <AvatarFallback>
@@ -104,11 +112,17 @@ export default function ProfileInformationForm({ user }: Props) {
             visible={responseStatus === ActionResponseStatus.PENDING}
           />
         </Button>
-        <Alert variant="destructive" visible={responseStatus === ActionResponseStatus.FAILED}>
+        <Alert
+          variant="destructive"
+          visible={responseStatus === ActionResponseStatus.FAILED}
+        >
           <AlertTitle>Error</AlertTitle>
           <AlertDescription>{message}</AlertDescription>
         </Alert>
-        <Alert variant="success" visible={responseStatus === ActionResponseStatus.SUCCEEDED}>
+        <Alert
+          variant="success"
+          visible={responseStatus === ActionResponseStatus.SUCCEEDED}
+        >
           <AlertTitle>Success</AlertTitle>
           <AlertDescription>{message}</AlertDescription>
         </Alert>
