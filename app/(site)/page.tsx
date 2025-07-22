@@ -20,8 +20,10 @@ function BubbleItem({ text }: { text: string }) {
 
 function ExploreItem({ text }: { text: string }) {
   return (
-    <div className="bg-gray-300 text-black p-3 rounded-lg shadow-sm text-sm">
-      {text}
+    <div className="bg-gray-200 text-black p-3 rounded-lg shadow-sm text-sm relative">
+      <div className="absolute left-2 bottom-2 bg-white px-3 py-1 rounded text-sm shadow">
+        {text}
+      </div>
     </div>
   );
 }
@@ -59,6 +61,7 @@ export default function Home() {
     "Fair labor practices",
     "Conscious consumerism",
     "Circular economy",
+    "Responsible sourcing",
   ];
 
   const [exploring, setExploring] = useState(false);
@@ -84,7 +87,7 @@ export default function Home() {
     <div className="w-screen h-full min-h-[80vh] flex flex-col items-center justify-center relative">
       <>
         <div className="w-[50vw] min-w-[300px] mb-10">
-          <SearchBar type={"item"} className={"py-4"} />
+          <SearchBar type={"item"} className={"py-4 bg-gray-200"} />
         </div>
         <div className="mb-4">
           What&apos;s most important to you?
@@ -94,11 +97,12 @@ export default function Home() {
             <BubbleItem key={index} text={text} />
           ))}
         </div>
-        <div className="mt-8 flex flex-col items-center cursor-pointer" onClick={handleExploreClick}>
+        <div className="mt-12 flex flex-col items-center cursor-pointer" onClick={handleExploreClick}>
           <span>Explore</span>
           <span className="mt-2 animate-bounce text-2xl">↓</span>
         </div>
       </>
+
       {exploring && (
         <div
           className={`bg-white z-50 flex items-center justify-center flex-col gap-12 absolute top-0 left-0 w-full h-full ${
@@ -117,7 +121,7 @@ export default function Home() {
             {/* <h1 className="text-4xl font-bold mb-4">Exploring!</h1> */}
             <button 
               onClick={handleCloseClick}
-              className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition-colors"
+              className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition-colors select-none"
             >
               Back
             </button>

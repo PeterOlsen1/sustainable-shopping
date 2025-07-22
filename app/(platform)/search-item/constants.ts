@@ -6,15 +6,44 @@ export type FilterOption = {
 
 export const filterOptions: FilterOption[] = [
     { label: "Sustainability Type" ,
-        options: [],
+        options: [
+            "Recycled",
+            "Upcycled",
+            "Organic",
+            "Fair Trade",
+            "Carbon Neutral",
+            "Biodegradable"
+        ],
     },
     { label: "Color" ,
-        options: [],
+        options: [
+            "White",
+            "Black",
+            "Blue",
+            "Red",
+            "Green",
+            "Yellow",
+            "Pink",
+        ],
     },
     { label: "Occasion" ,
-        options: [],
+        options: [
+            "Casual",
+            "Formal",
+            "Sport",
+            "Outdoor",
+            "Work",
+        ],
     },
     { label: "Material" ,
-        options: [],
+        options: [
+            "Cotton",
+            "Wool",
+            "Polyester",
+            "Linen",
+            "Bamboo",
+            "Hemp",
+            "Recycled Plastic",
+        ],
     }
 ]

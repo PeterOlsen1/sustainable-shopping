@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import { cn } from '@/lib/utils';
 
 export default function SearchBar({ value, type, className }: { value?: string, type: "brand" | "item", className?: string }) {
     const [searchValue, setSearchValue] = useState(value || '');
@@ -25,7 +26,7 @@ export default function SearchBar({ value, type, className }: { value?: string, 
         <input 
             type="text" 
             placeholder={`Search ${type}...`}
-            className={`w-full bg-gray-300 pl-10 pr-4 rounded focus:ring-0 focus:outline-none transition-colors ${className}`}  
+            className={cn("w-full bg-gray-300 pl-10 pr-4 rounded focus:ring-0 focus:outline-none transition-colors", className)}  
             onChange={(e) => setSearchValue(e.target.value)}
             onKeyUp={(e) => {
                 if (e.key === 'Enter') {

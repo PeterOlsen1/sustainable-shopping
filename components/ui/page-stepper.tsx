@@ -1,13 +1,13 @@
 export default function PageStepper({ currentPage, setCurrentPage, totalPages }: { currentPage: number; setCurrentPage: (page: number) => void; totalPages: number }) {
     return (
-        <div className="w-full h-16 flex items-center justify-center">
+        <div className="w-full h-16 flex items-center justify-center" style={{fontFamily: "Mulish", fontStyle: "normal", fontWeight: 400}}>
             <svg xmlns="http://www.w3.org/2000/svg" width="13" height="26" viewBox="0 0 13 26" fill="none" className="mr-4 cursor-pointer" onClick={() => setCurrentPage(Math.max(0, currentPage - 1))}>
                 <path d="M1.22833 13.132C4.92158 17.7082 9.27755 21.3332 13 25.4282C12.7012 26.0342 12.4339 26.1091 12.1014 25.8821C11.9012 25.7404 11.7133 25.5817 11.5398 25.4077C7.96559 22.0301 4.3712 18.6684 1.10254 14.9661C0.558889 14.3533 -0.0813624 13.8039 0.00849764 12.6531C0.976739 11.6566 2.09325 10.5784 3.12439 9.42299C5.9123 6.29959 9.13827 3.60294 11.742 0.307029C11.8464 0.179646 11.9842 0.0844731 12.1396 0.0323642C12.2127 0.00675056 12.29 -0.00383464 12.3672 0.00123322C12.4443 0.00630108 12.5197 0.0269206 12.5889 0.0618741C12.6496 0.11151 12.6976 0.175153 12.7289 0.247441C12.7601 0.319729 12.7738 0.398551 12.7686 0.477272C12.6746 0.790412 12.5221 1.08244 12.3193 1.33756C11.2567 2.58602 10.2099 3.85037 9.07987 5.03526C6.54132 7.71149 3.95334 10.331 1.22833 13.132Z" fill="black"/>
             </svg>
             {[...Array(totalPages).keys()].map(i => (
                 <button
                     key={i}
-                    className={`mx-1 px-2 py-1 rounded-full ${currentPage === i ? 'bg-gray-400' : ''}`}
+                    className={`mx-1 px-2 py-1 rounded-full select-none ${currentPage === i ? 'bg-black text-white' : ''}`}
                     onClick={() => setCurrentPage(i)}
                 >
                     {i + 1}
