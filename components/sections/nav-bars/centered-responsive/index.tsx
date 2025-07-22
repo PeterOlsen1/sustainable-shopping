@@ -24,7 +24,7 @@ export default function CenteredResponsiveNavbar({ session }: Props) {
           {/* Logo */}
           <div className="flex-1">
             <Link className="inline-flex" href="/" aria-label="Full-Stack-Kit">
-              Logo
+              Logo here!
             </Link>
           </div>
 

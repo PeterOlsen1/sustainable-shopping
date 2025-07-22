@@ -32,14 +32,14 @@ function filterRoutesBaseOnAuthenticationStatus(session: Session | null): typeof
 }
 
 export default function PlatformNavigation({ session }: Props) {
-  const filteredRoutes = filterRoutesBaseOnAuthenticationStatus(session);
+  // const filteredRoutes = filterRoutesBaseOnAuthenticationStatus(session);
 
   return (
     <nav className="bg-gray-200 dark:bg-gray-950 text-black p-2">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-14 items-center justify-between gap-12">
           <div className="flex items-center">
-            <Link href={appConfig.pages.home} className="flex-shrink-0 h-12 w-12">
+            <Link href={appConfig.pages.index} className="flex-shrink-0 h-12 w-12">
               Logo here!
             </Link>
             {/* <DesktopNavigation routes={filteredRoutes} /> */}
