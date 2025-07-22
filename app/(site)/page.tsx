@@ -86,7 +86,7 @@ export default function Home() {
     <div className="w-screen h-full min-h-[80vh] flex flex-col items-center justify-center relative">
       <>
         <div className="w-[50vw] min-w-[300px] mb-10">
-          <SearchBar type={"item"} className={"py-4 bg-gray-200"} />
+          <SearchBar type={"item"} className={"py-4"} />
         </div>
         <div className="mb-4">What&apos;s most important to you?</div>
         <div className="w-[40vw] min-w-[300px] flex flex-center flex-wrap gap-2 items-center justify-center">

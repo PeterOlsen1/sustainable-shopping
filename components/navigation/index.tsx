@@ -37,7 +37,7 @@ export default function PlatformNavigation({ session }: Props) {
   // const filteredRoutes = filterRoutesBaseOnAuthenticationStatus(session);
 
   return (
-    <nav className="text-black p-2">
+    <nav className="text-black p-2 pb-0">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-14 items-center justify-between gap-12">
           <div className="flex items-center">
@@ -62,6 +62,7 @@ export default function PlatformNavigation({ session }: Props) {
           </div>
         </div>
       </div>
+      <div className="border-b border-gray-200 w-[90%] mx-auto mt-4" />
     </nav>
   );
 }
