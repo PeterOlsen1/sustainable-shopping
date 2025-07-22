@@ -74,7 +74,7 @@ export default function SearchItemPage() {
             <div className="w-full flex flex-col gap-4">
                 <div className="flex gap-4 justify-center items-center">
                     <strong className="text-[1.75em]">
-                        "{query}"
+                        &quot;{query}&quot;
                     </strong>
                     <div className="flex-1">
                         315 results
