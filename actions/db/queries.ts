@@ -5,9 +5,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function getClothing() {
-  const clothes = await prisma?.clothing.findMany({
-    orderBy: { price: "asc" },
-  });
+  const clothes = await prisma?.clothing.findMany();
 
   const brands = await getBrands();
   return clothes.map((item) => {
@@ -43,9 +41,15 @@ export async function getClothingByQuery(query: string) {
 }
 
 export async function getBrands() {
-  return await prisma?.brand.findMany({
+  const brands = await prisma?.brand.findMany({
     orderBy: { name: "asc" },
   });
+
+  return brands.map((brand) => ({
+    ...brand,
+    knownFor: JSON.parse(brand.knownFor || "[]"),
+    clothingTypes: JSON.parse(brand.clothingTypes || "[]"),
+  }));
 }
 
 export async function getClothingFromBrand(brandId: number) {

@@ -1,15 +1,15 @@
 "use client";
+
 import { useSearchParams } from "next/navigation";
-import { filterOptions } from "./constants";
-import { useFilters, defaultFilters } from "./useFilters";
-import type { FilterOption as FilterOptionType } from "./constants";
+import { useFilters, defaultFilters, filterOptions } from "./useFilters";
+import type { FilterOption as FilterOptionType } from "./useFilters";
 import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import ClothingItem from "@/components/items/ClothingItem";
 import useQuery from "@/actions/db/useQuery";
 import Spinner from "@/components/ui/spinner";
-import { getBrands, getClothing } from "@/actions/db/queries";
+import { getClothing } from "@/actions/db/queries";
 
 function FilterOption({
   option,
@@ -84,23 +84,20 @@ function FilterOption({
               <input
                 type="checkbox"
                 id={`filter-${option.label}-${index}`}
-                onClick={(e: any) => {
+                onChange={(e) => {
                   setFilters((prev: any) => {
-                    const filterKey = option.filterKey; // Convert to lowercase to match your item properties
+                    const filterKey = option.filterKey; // This will be "brand.name"
+                    const currentFilters = prev[filterKey] || [];
 
                     if (e.target.checked) {
-                      // Add the option to the filter array for this category
                       return {
                         ...prev,
-                        [filterKey]: [...prev[filterKey], opt],
+                        [filterKey]: [...currentFilters, opt]
                       };
                     } else {
-                      // Remove the option from the filter array for this category
                       return {
                         ...prev,
-                        [filterKey]: prev[filterKey]
-                          ? prev[filterKey].filter((val) => val !== opt)
-                          : [],
+                        [filterKey]: currentFilters.filter((val: any) => val !== opt)
                       };
                     }
                   });
@@ -136,7 +133,6 @@ export default function SearchItemPage() {
 
   //kinda hackey workaround.
   useMemo(() => {
-    console.log(data);
     setResults(data || []);
   }, [data]);
 
@@ -145,17 +141,19 @@ export default function SearchItemPage() {
     return results.filter((item) => {
       // Check if item matches ALL active filters
       return Object.entries(filters).every(([key, filterValues]) => {
-        const itemProperty = item[key as keyof typeof item];
+        // Handle nested object properties like "brand.name"
+        const itemProperty = key.includes('.') 
+          ? key.split('.').reduce((obj, prop) => obj?.[prop], item)
+          : item[key as keyof typeof item];
 
-        // If no filters are selected for this category, or "All" is selected, include the item
-        if (
-          !filterValues ||
-          filterValues.length === 0 ||
-          filterValues.includes("All")
-        ) {
+        // If no filters are selected for this category, include the item
+        if (!filterValues || filterValues.length === 0 || filterValues.includes("All")) {
           return true;
         }
 
+        if (Array.isArray(itemProperty)) {
+          return filterValues.some((value) => itemProperty.includes(value));
+        }
         // Check if item's property matches any of the selected filter values
         return filterValues.includes(itemProperty);
       });
@@ -223,8 +221,14 @@ export default function SearchItemPage() {
                 } else if (e.target.value === "price_high_to_low") {
                   sortByPriceHighToLow();
                 }
+                else if (e.target.value === "relevance") {
+                  setResults(data);
+                }
               }}
             >
+              <option value="relevance" selected>
+                Sort by: Relevance
+              </option>
               <option value="price_low_to_high">
                 Sort by: Price (low to high)
               </option>
@@ -260,39 +264,3 @@ export default function SearchItemPage() {
     </div>
   );
 }
-
-// const testShirt = {
-//   name: "Test shirt",
-//   image:
-//     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJOPMTiNIRTx_BoHay_KM1AhGax4HYEItsUQ&s",
-//   brand: "Test brand",
-//   color: "Black",
-//   price: 19.99,
-//   sustainabilityType: "Organic",
-//   material: "Cotton",
-//   occasion: "Casual",
-// };
-
-// const [results, setResults] = useState([
-//   testShirt,
-//   testShirt,
-//   testShirt,
-//   testShirt,
-//   testShirt,
-//   testShirt,
-//   testShirt,
-//   testShirt,
-//   testShirt,
-//   testShirt,
-//   {
-//     name: "Special shirt",
-//     brand: "Special brand",
-//     image:
-//       "https://thelomasbrand.com/cdn/shop/files/Elijo_tee_white_flat.jpg?v=1730315943",
-//     color: "White",
-//     price: 24.99,
-//     sustainabilityType: "Recycled",
-//     material: "Linen",
-//     occasion: "Formal",
-//   },
-// ]);

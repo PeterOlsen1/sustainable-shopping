@@ -102,7 +102,7 @@ export default function ClothingModal({ item, onClose }: any) {
             </div>
           </div>
           <div className="flex gap-4 flex-wrap">
-            {JSON.parse(item.brand.knownFor).map((text, index) => (
+            {JSON.parse(item.brand.knownFor).map((text: any, index: any) => (
               <ItemBubble key={index} text={text} />
             ))}
           </div>
