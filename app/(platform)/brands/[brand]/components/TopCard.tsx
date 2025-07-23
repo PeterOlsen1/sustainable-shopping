@@ -24,14 +24,10 @@ export default function TopCard({ brand }: any) {
       <div className="flex flex-col h-full flex-1 gap-10 justify-between">
         <div className="flex flex-col gap-4">
           <div className="text-2xl font-bold flex-1">
-            {decodeURIComponent(brand)}
+            {brand.name}
           </div>
           <div>
-            Patagonia, Inc. is an American retailer of outdoor
-            recreation clothing, equipment, and food. It was founded by Yvon
-            Chouinard in 1973 and is based in Ventura, California. Patagonia
-            operates stores in over ten countries, and factories in 16
-            countries.
+            {brand.description || "No description available."}
           </div>
         </div>
         <div className="flex">

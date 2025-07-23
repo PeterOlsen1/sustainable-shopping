@@ -206,9 +206,13 @@ export default function SearchItemPage() {
       <div className="w-full flex flex-col gap-4">
         <div className="flex gap-4 justify-center items-center">
           <strong className="text-[1.75em]">&quot;{query}&quot;</strong>
-          <div className="flex-1">
-            {displayedResults.length} result
-            {displayedResults.length !== 1 ? "s" : ""}
+          <div className="flex-1 text-gray-500">
+            {!loading && !error && (
+              <div>
+                {displayedResults.length} result
+                {displayedResults.length !== 1 ? "s" : ""}
+              </div>
+            )}
           </div>
           <div>
             <select
@@ -254,7 +258,7 @@ export default function SearchItemPage() {
             displayedResults.map((result, index) => (
               <ClothingItem item={result} key={index} />
             ))}
-          {displayedResults.length === 0 && (
+          {!loading && !error && displayedResults.length === 0 && (
             <div className="col-span-3 text-center text-gray-500 h-32 grid place-items-center">
               No results found!
             </div>

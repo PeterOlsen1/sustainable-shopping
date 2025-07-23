@@ -17,6 +17,21 @@ export async function getClothing() {
   });
 }
 
+export async function getBrandPage(brandId: number) {
+    const brand = await prisma?.brand.findUnique({
+      where: { id: brandId },
+    });
+
+    brand.knownFor = JSON.parse(brand.knownFor || "[]");
+    brand.clothingTypes = JSON.parse(brand.clothingTypes || "[]");
+
+    const clothing = await getClothingByBrand(brandId);
+    return {
+        ...brand,
+        clothing
+    };
+}
+
 export async function getClothingByBrand(brandId: number) {
   return await prisma?.clothing.findMany({
     where: { brand: { id: brandId } },

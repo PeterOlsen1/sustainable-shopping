@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
@@ -15,10 +15,17 @@ export default function SearchBar({
 }) {
   const [searchValue, setSearchValue] = useState(value || "");
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    setSearchValue(value || "");
-  }, [value]);
+    // Check for query parameter in URL first, then fall back to prop value
+    const queryParam = searchParams.get("query");
+    if (queryParam) {
+      setSearchValue(queryParam);
+    } else {
+      setSearchValue(value || "");
+    }
+  }, [value, searchParams]);
 
   const handleSearch = () => {
     router.push(`/search-${type}?query=` + encodeURIComponent(searchValue));
