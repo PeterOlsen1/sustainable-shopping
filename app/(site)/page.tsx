@@ -38,8 +38,8 @@ export default function Home() {
       return [];
     }
     const out = new Set();
-    data.forEach(b => {
-      b.knownFor.forEach(k => {
+    data.forEach((b: any) => {
+      b.knownFor.forEach((k: any) => {
         out.add(k)
       })
     })
@@ -91,7 +91,7 @@ export default function Home() {
             {loading && (
               <Spinner />
             )}
-            {!loading && !error && importantItemsText.slice(0, 6).map((text, index) => (
+            {!loading && !error && importantItemsText.slice(0, 6).map((text: any, index) => (
               <BubbleItem key={index} text={text} />
             ))}
           </div>
@@ -113,7 +113,7 @@ export default function Home() {
             <div className="w-[50%] flex grid grid-cols-3 grid-rows-2 gap-4 aspect-[5/3]">
               {importantItemsText
                 .slice(pageIndex * 6, (pageIndex + 1) * 6)
-                .map((text, index) => (
+                .map((text: any, index) => (
                   <ExploreItem key={index} text={text} />
                 ))}
             </div>

@@ -4,6 +4,7 @@
 - Deploy
 - Migrate to postgres
 - Fill more data
+- Configure auth for remote site
 
 ### Now
 
