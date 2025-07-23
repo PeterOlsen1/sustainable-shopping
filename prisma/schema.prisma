@@ -105,6 +105,7 @@ model Brand {
   description    String
   clothingTypes  String   // Store as JSON string: '["shirts", "pants", "jackets"]'
   knownFor       String   // Store as JSON string: '["sustainability", "quality"]'
+  imageURL       String   @default("")
   rating         Decimal
   clothing       Clothing[] // Backrelation to Clothing
   createdAt      DateTime @default(now())
@@ -116,6 +117,7 @@ model Clothing {
   material    String
   price		    Decimal
   brandId     Int
+  imageURL    String   @default("")
   brand       Brand    @relation(fields: [brandId], references: [id])
   createdAt   DateTime @default(now())
 }

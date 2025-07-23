@@ -12,11 +12,12 @@ function AdditionalResource({ href, label }: { href: string; label: string }) {
 }
 
 export default function TopCard({ brand }: any) {
+  console.log(brand);
   return (
     <div className="flex gap-8 bg-[#E3E9DA] rounded-lg p-8">
       <Image
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4tRWnMmKFtTCIPO42VzrmUxlKF1eLtMo0aA&s"
-        alt="Patagonia"
+        src={brand.imageURL}
+        alt={brand.name}
         width={250}
         height={250}
         className="rounded-lg object-cover"

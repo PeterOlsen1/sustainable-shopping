@@ -40,8 +40,41 @@ export async function getClothingByBrand(brandId: number) {
 }
 
 export async function getClothingById(id: number) {
-  return await prisma?.clothing.findUnique({
+  const clothing = await prisma?.clothing.findUnique({
     where: { id },
+    include: {
+      brand: true
+    }
+  });
+
+  if (!clothing) return null;
+
+  return clothing;
+}
+
+export async function updateClothingItem(id: number, data: {
+  type: string;
+  material: string;
+  price: string;
+  brandId: string;
+  imageURL?: string;
+}) {
+  const updateData: any = {
+    type: data.type,
+    material: data.material,
+    price: parseFloat(data.price),
+    brandId: parseInt(data.brandId),
+    ...(data.imageURL ? { imageURL: data.imageURL } : {}),
+  };
+
+  // // Only add imageURL if it's provided and not empty
+  // if (data.imageURL && data.imageURL.trim() !== "") {
+  //   updateData.imageURL = data.imageURL;
+  // }
+
+  return await prisma?.clothing.update({
+    where: { id },
+    data: updateData,
   });
 }
 
@@ -67,9 +100,97 @@ export async function getBrands() {
   }));
 }
 
+export async function getBrandById(id: number) {
+  const brand = await prisma?.brand.findUnique({
+    where: { id },
+  });
+
+  if (!brand) return null;
+
+  return {
+    ...brand,
+    knownFor: JSON.parse(brand.knownFor || "[]"),
+    clothingTypes: JSON.parse(brand.clothingTypes || "[]"),
+  };
+}
+
 export async function getClothingFromBrand(brandId: number) {
   return await prisma?.clothing.findMany({
     where: { brandId },
     orderBy: { price: "asc" },
+  });
+}
+
+
+
+
+// model Clothing {
+//   id          Int      @id @default(autoincrement())
+//   type        String   
+//   material    String
+//   price		    Decimal
+//   brandId     Int
+//   brand       Brand    @relation(fields: [brandId], references: [id])
+//   createdAt   DateTime @default(now())
+// }
+export async function addClothingItem(data: {
+  type: string;
+  material: string;
+  price: number;
+  brandId: number;
+  imageURL: string;
+}) {
+  return await prisma?.clothing.create({
+    data,
+  });
+}
+
+// model Brand {
+//   id             Int      @id @default(autoincrement())
+//   name           String
+//   website        String
+//   description    String
+//   clothingTypes  String   // Store as JSON string: '["shirts", "pants", "jackets"]'
+//   knownFor       String   // Store as JSON string: '["sustainability", "quality"]'
+//   rating         Decimal
+//   clothing       Clothing[] // Backrelation to Clothing
+//   createdAt      DateTime @default(now())
+// }
+export async function addBrand(data: any) {
+  return await prisma?.brand.create({
+    data: {
+      ...data,
+      knownFor: JSON.stringify(data.knownFor),
+      clothingTypes: JSON.stringify(data.clothingTypes),
+    },
+  });
+}
+
+export async function updateBrand(id: number, data: {
+  name: string;
+  website: string;
+  description: string;
+  clothingTypes: string;
+  knownFor: string;
+  rating: string;
+  imageURL?: string; // Optional for now
+}) {
+  // Convert comma-separated strings to JSON arrays
+  const clothingTypesArray = data.clothingTypes.split(',').map(item => item.trim());
+  const knownForArray = data.knownFor.split(',').map(item => item.trim());
+  
+  const updateData: any = {
+    name: data.name,
+    website: data.website,
+    description: data.description,
+    clothingTypes: JSON.stringify(clothingTypesArray),
+    knownFor: JSON.stringify(knownForArray),
+    rating: parseFloat(data.rating),
+    imageURL: data.imageURL || "", // Save imageURL or empty string if not provided
+  };
+  
+  return await prisma?.brand.update({
+    where: { id },
+    data: updateData,
   });
 }
