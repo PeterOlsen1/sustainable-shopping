@@ -3,13 +3,11 @@
 import { useSearchParams } from "next/navigation";
 import { useFilters, defaultFilters, filterOptions } from "./useFilters";
 import type { FilterOption as FilterOptionType } from "./useFilters";
-import React, { useEffect, useMemo, useState } from "react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useMemo, useState } from "react";
 import ClothingItem from "@/components/items/ClothingItem";
-import useQuery from "@/actions/db/useQuery";
 import Spinner from "@/components/ui/spinner";
-import { getClothing } from "@/actions/db/queries";
+import { getClothing, getClothingByQuery } from "@/actions/db/queries";
+import useQuery from "@/actions/db/useQuery";
 
 function FilterOption({
   option,
@@ -127,7 +125,13 @@ export default function SearchItemPage() {
   const params = useSearchParams();
   const query = params.get("query");
 
-  const { data, loading, error } = useQuery(getClothing);
+  const {data, loading, error} = useQuery(async () => {
+      if (query) {
+        return await getClothingByQuery(query);
+      } else {
+        return await getClothing();
+      }
+  }, [query])
 
   const [results, setResults] = useState(data || []);
 
@@ -140,10 +144,10 @@ export default function SearchItemPage() {
   const displayedResults = useMemo(() => {
     return results.filter((item) => {
       // Check if item matches ALL active filters
-      return Object.entries(filters).every(([key, filterValues]) => {
+      return Object.entries(filters).every(([key, filterValues]: [string, string[]]) => {
         // Handle nested object properties like "brand.name"
         const itemProperty = key.includes('.') 
-          ? key.split('.').reduce((obj, prop) => obj?.[prop], item)
+          ? key.split('.').reduce((obj: any, prop) => obj?.[prop], item)
           : item[key as keyof typeof item];
 
         // If no filters are selected for this category, include the item
@@ -205,7 +209,17 @@ export default function SearchItemPage() {
       </div>
       <div className="w-full flex flex-col gap-4">
         <div className="flex gap-4 justify-center items-center">
-          <strong className="text-[1.75em]">&quot;{query}&quot;</strong>
+          <strong className="text-[1.75em]">
+            {query ? (
+              <div>
+                &quot;{query}&quot;
+              </div>
+            ) : (
+              <div>
+                All Clothes
+              </div>
+            )}
+          </strong>
           <div className="flex-1 text-gray-500">
             {!loading && !error && (
               <div>
@@ -242,7 +256,7 @@ export default function SearchItemPage() {
             </select>
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 lg:grid-cols-4 gap-4">
           {loading && (
             <div className="col-span-3 text-center text-gray-500 h-32 grid place-items-center">
               <Spinner />

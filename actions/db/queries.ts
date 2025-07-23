@@ -80,11 +80,20 @@ export async function updateClothingItem(id: number, data: {
 
 // This is the main searching function
 export async function getClothingByQuery(query: string) {
-  return await prisma?.clothing.findMany({
+  const clothes = await prisma?.clothing.findMany({
     where: {
       OR: [{ material: { contains: query } }, { type: { contains: query } }],
     },
     orderBy: { price: "asc" },
+  });
+
+  const brands = await getBrands();
+  return clothes.map((item) => {
+    const brand = brands.find((b) => b.id === item.brandId);
+    return {
+      ...item,
+      brand,
+    };
   });
 }
 

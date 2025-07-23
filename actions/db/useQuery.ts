@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function useQuery(query: () => Promise<any>) {
+export default function useQuery(query: () => Promise<any>, deps: any[]) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<any>(null);
@@ -21,7 +21,7 @@ export default function useQuery(query: () => Promise<any>) {
     };
 
     fetchData();
-  }, []);
+  }, deps || []);
 
   return {
     data,

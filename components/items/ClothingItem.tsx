@@ -12,14 +12,11 @@ export default function ClothingItem({ item }: { item: any }) {
     <>
       <div className="flex flex-col">
         <Image
-          // src={
-          //   "https://www.patagonia.com/dw/image/v2/BDJB_PRD/on/demandware.static/-/Sites-patagonia-master/default/dwd33c434f/images/hi-res/38504_NENA.jpg?sw=768&sh=768&sfrm=png&q=95&bgcolor=f3f4ef"
-          // }
           src={item.imageURL}
           alt={item.name}
           width={250}
           height={250}
-          className="rounded-lg object-cover cursor-pointer"
+          className="rounded-lg object-cover cursor-pointer w-[250px] h-[250px]"
           onClick={() => setIsOpen(true)}
         />
         <div className="mt-2">
