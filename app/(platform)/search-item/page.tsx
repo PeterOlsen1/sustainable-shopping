@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useFilters, defaultFilters, filterOptions } from "./useFilters";
 import type { FilterOption as FilterOptionType } from "./useFilters";
 import { useMemo, useState } from "react";
@@ -124,6 +124,7 @@ function FilterOption({
 }
 
 export default function SearchItemPage() {
+  const router = useRouter();
   const params = useSearchParams();
   const query = params.get("query");
 
@@ -213,6 +214,12 @@ export default function SearchItemPage() {
           className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors"
         >
           Clear filters
+        </button>
+        <button
+          onClick={() => router.push("/search-item")}
+          className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors"
+        >
+          View All 
         </button>
       </div>
       <div className="w-full flex flex-col gap-4">

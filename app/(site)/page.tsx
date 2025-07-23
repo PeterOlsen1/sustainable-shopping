@@ -1,12 +1,22 @@
 "use client";
 
 import SearchBar from "@/components/ui/search-bar";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import PageStepper from "@/components/ui/page-stepper";
+import { getBrands } from "@/actions/db/queries";
+import useQuery from "@/actions/db/useQuery";
+import Spinner from "@/components/ui/spinner";
+import { useRouter } from "next/navigation";
 
 function BubbleItem({ text }: { text: string }) {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/search-brand?query=${encodeURIComponent(text)}`);
+  };
+
   return (
-    <div className="bg-white text-black p-2 rounded-full text-sm">{text}</div>
+    <div className="bg-white text-black p-2 rounded-full text-sm cursor-pointer" onClick={handleClick}>{text}</div>
   );
 }
 
@@ -21,40 +31,21 @@ function ExploreItem({ text }: { text: string }) {
 }
 
 export default function Home() {
-  const importantItemsText = [
-    "Natural material",
-    "Quality construction",
-    "Ethically produced",
-    "Low water usage",
-    "Recyclable",
-    "Durable / long-lasting",
-    //just started generating with copilot after this...
-    "Fair trade",
-    "Vegan",
-    "Sustainable packaging",
-    "Local production",
-    "Carbon neutral",
-    "Biodegradable",
-    "Energy efficient",
-    "Minimalist design",
-    "Upcycled materials",
-    "Non-toxic dyes",
-    "Socially responsible",
-    "Transparent sourcing",
-    "Community support",
-    "Innovative design",
-    "Eco-friendly",
-    "Recycled materials",
-    "Organic",
-    "Handmade",
-    "Cruelty-free",
-    "Sustainable",
-    "Zero waste",
-    "Fair labor practices",
-    "Conscious consumerism",
-    "Circular economy",
-    "Responsible sourcing",
-  ];
+  const { data, loading, error } = useQuery(getBrands);
+
+  const importantItemsText = useMemo(() => {
+    if (!data) {
+      return [];
+    }
+    const out = new Set();
+    data.forEach(b => {
+      b.knownFor.forEach(k => {
+        out.add(k)
+      })
+    })
+    
+    return Array.from(out);
+  }, [data])
 
   const [exploring, setExploring] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -97,17 +88,20 @@ export default function Home() {
           </div>
           <div className="mb-4">What&apos;s most important to you?</div>
           <div className="w-[40vw] min-w-[300px] flex flex-center flex-wrap gap-2 items-center justify-center">
-            {importantItemsText.slice(0, 6).map((text, index) => (
+            {loading && (
+              <Spinner />
+            )}
+            {!loading && !error && importantItemsText.slice(0, 6).map((text, index) => (
               <BubbleItem key={index} text={text} />
             ))}
           </div>
-          <div
+          {/* <div
             className="mt-12 flex flex-col items-center cursor-pointer"
             onClick={handleExploreClick}
           >
             <span>Explore</span>
             <span className="mt-2 animate-bounce text-2xl">↓</span>
-          </div>
+          </div> */}
         </>
 
         {exploring && (

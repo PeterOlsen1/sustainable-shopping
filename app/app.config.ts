@@ -21,8 +21,8 @@ const appConfig: AppConfig = {
   },
 
   redirects: {
-    afterSignin: "/dashboard",
-    afterSignout: "/signin",
+    afterSignin: "/",
+    afterSignout: "/",
     whenAccessingAnUnauthorizedPage: "/unauthorized",
     whenNotLoggedInAndAccessingProtectedPage: "/signin",
   },

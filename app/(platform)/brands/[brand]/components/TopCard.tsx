@@ -11,20 +11,19 @@ function AdditionalResource({ href, label }: { href: string; label: string }) {
   );
 }
 
-export default function TopCard({ brand }: any) {
-  console.log(brand);
+export default function TopCard({ brand, brandPage = true }: { brand: any, brandPage?: boolean}) {
   return (
     <div className="flex gap-8 bg-[#E3E9DA] rounded-lg p-8">
       <Image
         src={brand.imageURL}
         alt={brand.name}
-        width={250}
-        height={250}
+        width={brandPage ? 250 : 150}
+        height={brandPage ? 200 : 100}
         className="rounded-lg object-cover"
       />
       <div className="flex flex-col h-full flex-1 gap-10 justify-between">
-        <div className="flex flex-col gap-4">
-          <div className="text-2xl font-bold flex-1">{brand.name}</div>
+        <div className="flex flex-col flex-1 gap-4">
+          <div className="text-2xl font-bold">{brand.name}</div>
           <div>{brand.description || "No description available."}</div>
         </div>
         <div className="flex">

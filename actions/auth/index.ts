@@ -27,7 +27,7 @@ export async function signinWithGoogle({
   redirectUrl,
 }: SignInButtonProps = {}) {
   return signIn("google", {
-    redirectTo: redirectUrl || appConfig.pages.dashboard,
+    redirectTo: redirectUrl || appConfig.redirects.afterSignin,
   });
 }
 

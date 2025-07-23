@@ -20,7 +20,7 @@ export default function LoginButton({ session }: Props) {
 
   return (
     <Button className="font-bold py-2 px-4 rounded" onClick={goToSignIn}>
-      Sign in
+      Log in
     </Button>
   );
 }

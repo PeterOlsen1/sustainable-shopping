@@ -40,6 +40,22 @@ export default function CenteredResponsiveNavbar({ session }: Props) {
                 Sign out
               </Link>
             )}
+            {!session && (
+              <>
+              <Link
+                className="font-medium text-sm p-2 px-4 rounded bg-[#4E7875] text-white hover:bg-[#3E6865] whitespace-nowrap transition duration-250 ease-in-out"
+                href={appConfig.pages.signin}
+              >
+                Log in
+              </Link>
+              <Link
+                className="font-medium text-sm p-2 px-4 rounded bg-[#D0E0DF] text-[#23504C] hover:bg-[#C0D0DE] whitespace-nowrap transition duration-250 ease-in-out"
+                href={appConfig.pages.signin}
+              >
+                Sign up
+              </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile menu */}

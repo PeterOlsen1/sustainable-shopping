@@ -69,8 +69,8 @@ export default function SignInView({ session }: Props) {
         </Alert>
       </Flex>
       <FlexCol className="gap-4">
-        <h1 className="text-4xl font-bold text-center">Sign in</h1>
-        <p className="text-gray-500 text-center">Choose an option to signin</p>
+        <h1 className="text-4xl font-bold text-center">Log in</h1>
+        <p className="text-gray-500 text-center">Choose an option to log in</p>
       </FlexCol>
       <FlexCol className="w-full max-w-sm">
         <FlexCol className="gap-2">

@@ -8,6 +8,5 @@
 ### Now
 
 - Finish home page
+    - Popular searches
 - Add extra features to brand page
-- Brand search feature?
-- Search page actually search and not just all items
