@@ -90,12 +90,14 @@ function FilterOption({
                     if (e.target.checked) {
                       return {
                         ...prev,
-                        [filterKey]: [...currentFilters, opt]
+                        [filterKey]: [...currentFilters, opt],
                       };
                     } else {
                       return {
                         ...prev,
-                        [filterKey]: currentFilters.filter((val: any) => val !== opt)
+                        [filterKey]: currentFilters.filter(
+                          (val: any) => val !== opt,
+                        ),
                       };
                     }
                   });
@@ -125,13 +127,13 @@ export default function SearchItemPage() {
   const params = useSearchParams();
   const query = params.get("query");
 
-  const {data, loading, error} = useQuery(async () => {
-      if (query) {
-        return await getClothingByQuery(query);
-      } else {
-        return await getClothing();
-      }
-  }, [query])
+  const { data, loading, error } = useQuery(async () => {
+    if (query) {
+      return await getClothingByQuery(query);
+    } else {
+      return await getClothing();
+    }
+  }, [query]);
 
   const [results, setResults] = useState(data || []);
 
@@ -142,25 +144,31 @@ export default function SearchItemPage() {
 
   const { filters, setFilters } = useFilters();
   const displayedResults = useMemo(() => {
-    return results.filter((item) => {
+    return results.filter((item: any) => {
       // Check if item matches ALL active filters
-      return Object.entries(filters).every(([key, filterValues]: [string, string[]]) => {
-        // Handle nested object properties like "brand.name"
-        const itemProperty = key.includes('.') 
-          ? key.split('.').reduce((obj: any, prop) => obj?.[prop], item)
-          : item[key as keyof typeof item];
+      return Object.entries(filters).every(
+        ([key, filterValues]: [string, string[]]) => {
+          // Handle nested object properties like "brand.name"
+          const itemProperty = key.includes(".")
+            ? key.split(".").reduce((obj: any, prop) => obj?.[prop], item)
+            : item[key as keyof typeof item];
 
-        // If no filters are selected for this category, include the item
-        if (!filterValues || filterValues.length === 0 || filterValues.includes("All")) {
-          return true;
-        }
+          // If no filters are selected for this category, include the item
+          if (
+            !filterValues ||
+            filterValues.length === 0 ||
+            filterValues.includes("All")
+          ) {
+            return true;
+          }
 
-        if (Array.isArray(itemProperty)) {
-          return filterValues.some((value) => itemProperty.includes(value));
-        }
-        // Check if item's property matches any of the selected filter values
-        return filterValues.includes(itemProperty);
-      });
+          if (Array.isArray(itemProperty)) {
+            return filterValues.some((value) => itemProperty.includes(value));
+          }
+          // Check if item's property matches any of the selected filter values
+          return filterValues.includes(itemProperty);
+        },
+      );
     });
   }, [results, filters]);
 
@@ -210,15 +218,7 @@ export default function SearchItemPage() {
       <div className="w-full flex flex-col gap-4">
         <div className="flex gap-4 justify-center items-center">
           <strong className="text-[1.75em]">
-            {query ? (
-              <div>
-                &quot;{query}&quot;
-              </div>
-            ) : (
-              <div>
-                All Clothes
-              </div>
-            )}
+            {query ? <div>&quot;{query}&quot;</div> : <div>All Clothes</div>}
           </strong>
           <div className="flex-1 text-gray-500">
             {!loading && !error && (
@@ -238,8 +238,7 @@ export default function SearchItemPage() {
                   sortByPriceLowToHigh();
                 } else if (e.target.value === "price_high_to_low") {
                   sortByPriceHighToLow();
-                }
-                else if (e.target.value === "relevance") {
+                } else if (e.target.value === "relevance") {
                   setResults(data);
                 }
               }}
@@ -269,7 +268,7 @@ export default function SearchItemPage() {
           )}
           {!loading &&
             !error &&
-            displayedResults.map((result, index) => (
+            displayedResults.map((result: any, index: number) => (
               <ClothingItem item={result} key={index} />
             ))}
           {!loading && !error && displayedResults.length === 0 && (

@@ -18,18 +18,18 @@ export async function getClothing() {
 }
 
 export async function getBrandPage(brandId: number) {
-    const brand = await prisma?.brand.findUnique({
-      where: { id: brandId },
-    });
+  const brand: any = await prisma?.brand.findUnique({
+    where: { id: brandId },
+  });
 
-    brand.knownFor = JSON.parse(brand.knownFor || "[]");
-    brand.clothingTypes = JSON.parse(brand.clothingTypes || "[]");
+  brand.knownFor = JSON.parse(brand.knownFor || "[]");
+  brand.clothingTypes = JSON.parse(brand.clothingTypes || "[]");
 
-    const clothing = await getClothingByBrand(brandId);
-    return {
-        ...brand,
-        clothing
-    };
+  const clothing = await getClothingByBrand(brandId);
+  return {
+    ...brand,
+    clothing,
+  };
 }
 
 export async function getClothingByBrand(brandId: number) {
@@ -43,8 +43,8 @@ export async function getClothingById(id: number) {
   const clothing = await prisma?.clothing.findUnique({
     where: { id },
     include: {
-      brand: true
-    }
+      brand: true,
+    },
   });
 
   if (!clothing) return null;
@@ -52,13 +52,16 @@ export async function getClothingById(id: number) {
   return clothing;
 }
 
-export async function updateClothingItem(id: number, data: {
-  type: string;
-  material: string;
-  price: string;
-  brandId: string;
-  imageURL?: string;
-}) {
+export async function updateClothingItem(
+  id: number,
+  data: {
+    type: string;
+    material: string;
+    price: string;
+    brandId: string;
+    imageURL?: string;
+  },
+) {
   const updateData: any = {
     type: data.type,
     material: data.material,
@@ -130,12 +133,9 @@ export async function getClothingFromBrand(brandId: number) {
   });
 }
 
-
-
-
 // model Clothing {
 //   id          Int      @id @default(autoincrement())
-//   type        String   
+//   type        String
 //   material    String
 //   price		    Decimal
 //   brandId     Int
@@ -175,19 +175,24 @@ export async function addBrand(data: any) {
   });
 }
 
-export async function updateBrand(id: number, data: {
-  name: string;
-  website: string;
-  description: string;
-  clothingTypes: string;
-  knownFor: string;
-  rating: string;
-  imageURL?: string; // Optional for now
-}) {
+export async function updateBrand(
+  id: number,
+  data: {
+    name: string;
+    website: string;
+    description: string;
+    clothingTypes: string;
+    knownFor: string;
+    rating: string;
+    imageURL?: string; // Optional for now
+  },
+) {
   // Convert comma-separated strings to JSON arrays
-  const clothingTypesArray = data.clothingTypes.split(',').map(item => item.trim());
-  const knownForArray = data.knownFor.split(',').map(item => item.trim());
-  
+  const clothingTypesArray = data.clothingTypes
+    .split(",")
+    .map((item) => item.trim());
+  const knownForArray = data.knownFor.split(",").map((item) => item.trim());
+
   const updateData: any = {
     name: data.name,
     website: data.website,
@@ -197,7 +202,7 @@ export async function updateBrand(id: number, data: {
     rating: parseFloat(data.rating),
     imageURL: data.imageURL || "", // Save imageURL or empty string if not provided
   };
-  
+
   return await prisma?.brand.update({
     where: { id },
     data: updateData,

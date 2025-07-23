@@ -65,20 +65,26 @@ export default async function UpdateItemPage() {
 
                 <div className="space-y-2">
                   <div>
-                    <span className="text-sm font-medium text-gray-600">Material:</span>
+                    <span className="text-sm font-medium text-gray-600">
+                      Material:
+                    </span>
                     <p className="text-gray-900 capitalize">{item.material}</p>
                   </div>
 
                   {item.brand && (
                     <div>
-                      <span className="text-sm font-medium text-gray-600">Brand:</span>
+                      <span className="text-sm font-medium text-gray-600">
+                        Brand:
+                      </span>
                       <p className="text-gray-900">{item.brand.name}</p>
                     </div>
                   )}
 
                   {item.brand && (
                     <div>
-                      <span className="text-sm font-medium text-gray-600">Brand Rating:</span>
+                      <span className="text-sm font-medium text-gray-600">
+                        Brand Rating:
+                      </span>
                       <p className="text-gray-900">
                         {Number(item.brand.rating).toFixed(1)}/5.0
                       </p>
@@ -86,7 +92,9 @@ export default async function UpdateItemPage() {
                   )}
 
                   <div>
-                    <span className="text-sm font-medium text-gray-600">Added:</span>
+                    <span className="text-sm font-medium text-gray-600">
+                      Added:
+                    </span>
                     <p className="text-gray-900">
                       {new Date(item.createdAt).toLocaleDateString()}
                     </p>

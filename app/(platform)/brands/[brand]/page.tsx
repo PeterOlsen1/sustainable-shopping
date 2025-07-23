@@ -1,10 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import TopCard from "./components/TopCard";
 import ClothingItem from "@/components/items/ClothingItem";
-import { useState } from "react";
 import useQuery from "@/actions/db/useQuery";
 import { getBrandPage } from "@/actions/db/queries";
 import Spinner from "@/components/ui/spinner";
@@ -14,13 +12,13 @@ export default function BrandPage({ params }: { params: { brand: string } }) {
   const brand = params.brand;
 
   const { data, loading, error } = useQuery(() =>
-    getBrandPage(parseInt(brand))
+    getBrandPage(parseInt(brand)),
   );
 
   if (loading) {
     return (
       <div className="w-[90%] mx-auto h-full grid place-items-center">
-          <Spinner />
+        <Spinner />
       </div>
     );
   }
@@ -28,7 +26,11 @@ export default function BrandPage({ params }: { params: { brand: string } }) {
   return (
     <div className="flex flex-col gap-8 min-h-screen mt-12 w-[90%] mx-auto">
       <div>
-        <button className="text-md" aria-label="Go back" onClick={() => router.back()}>
+        <button
+          className="text-md"
+          aria-label="Go back"
+          onClick={() => router.back()}
+        >
           ← Go back
         </button>
       </div>
@@ -42,7 +44,7 @@ export default function BrandPage({ params }: { params: { brand: string } }) {
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5">
-            {data.clothing.map((item) => (
+            {data.clothing.map((item: any) => (
               <ClothingItem
                 key={item}
                 item={{
@@ -53,7 +55,7 @@ export default function BrandPage({ params }: { params: { brand: string } }) {
                     description: data.description,
                     id: data.id,
                     knownFor: data.knownFor,
-                  }
+                  },
                 }}
               />
             ))}

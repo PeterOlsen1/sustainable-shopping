@@ -6,7 +6,7 @@ export const defaultFilters = {
   material: [],
   type: [],
   "brand.name": [],
-  "brand.knownFor": []
+  "brand.knownFor": [],
 };
 
 export type FilterOption = {
@@ -25,21 +25,12 @@ export const filterOptions: FilterOption[] = [
   {
     label: "Material",
     filterKey: "material",
-    options: [
-      "Organic Cotton",
-      "Fleece",
-      "Denim",
-      "Recycled Polyester"
-    ],
+    options: ["Organic Cotton", "Fleece", "Denim", "Recycled Polyester"],
   },
   {
     label: "Brand",
     filterKey: "brand.name",
-    options: [
-      "Patagonia",
-      "Everlane",
-      "Eileen Fisher"
-    ]
+    options: ["Patagonia", "Everlane", "Eileen Fisher"],
   },
   {
     label: "Brand Qualities",
@@ -47,10 +38,10 @@ export const filterOptions: FilterOption[] = [
     options: [
       "Ethical production",
       "Low water usage",
-      "Recyclability", 
-      "Youth focus"
-    ]
-  }
+      "Recyclability",
+      "Youth focus",
+    ],
+  },
 ];
 
 export function useFilters() {

@@ -24,12 +24,8 @@ export default function TopCard({ brand }: any) {
       />
       <div className="flex flex-col h-full flex-1 gap-10 justify-between">
         <div className="flex flex-col gap-4">
-          <div className="text-2xl font-bold flex-1">
-            {brand.name}
-          </div>
-          <div>
-            {brand.description || "No description available."}
-          </div>
+          <div className="text-2xl font-bold flex-1">{brand.name}</div>
+          <div>{brand.description || "No description available."}</div>
         </div>
         <div className="flex">
           <div className="flex-1 flex-col">
