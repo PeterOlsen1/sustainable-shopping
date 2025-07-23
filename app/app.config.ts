@@ -5,7 +5,7 @@ const appConfig: AppConfig = {
   brand: {
     companyName: "Full Stack Kit LLC.",
     appName: "Full-Stack-Kit",
-    logoUrl: "/images/logo.png",
+    logoUrl: "/favicon.ico",
   },
 
   pages: {

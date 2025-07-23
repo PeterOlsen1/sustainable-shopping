@@ -90,9 +90,32 @@ model VerificationToken {
 }
 
 model Post {
-  id String @id @default(cuid())
-  title String
-  content String
+  id        String @id @default(cuid())
+  title     String
+  content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+// SQLite doesn't support arrays of primitive types (weird?) so we store as JSON string
+model Brand {
+  id             Int      @id @default(autoincrement())
+  name           String
+  website        String
+  description    String
+  clothingTypes  String   // Store as JSON string: '["shirts", "pants", "jackets"]'
+  knownFor       String   // Store as JSON string: '["sustainability", "quality"]'
+  rating         Decimal
+  clothing       Clothing[] // Backrelation to Clothing
+  createdAt      DateTime @default(now())
+}
+
+model Clothing {
+  id          Int      @id @default(autoincrement())
+  type        String   
+  material    String
+  price		    Decimal
+  brandId     Int
+  brand       Brand    @relation(fields: [brandId], references: [id])
+  createdAt   DateTime @default(now())
 }

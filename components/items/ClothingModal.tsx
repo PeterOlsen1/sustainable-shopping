@@ -17,9 +17,8 @@ function ItemBubble({ text }: { text: string }) {
     </div>
   );
 }
-export default function ClothingModal({ item, onClose }: any) {
-  item = shirt; //for testing purposes
 
+export default function ClothingModal({ item, onClose }: any) {
   return (
     <div
       className="fixed top-0 left-0 w-screen h-screen grid place-items-center bg-black bg-opacity-50 z-50"
@@ -55,7 +54,7 @@ export default function ClothingModal({ item, onClose }: any) {
         </div>
         <div className="flex gap-6">
           <Image
-            src={item.imageUrl}
+            src={shirt.imageUrl}
             alt={item.name}
             width={400}
             height={400}
@@ -63,7 +62,7 @@ export default function ClothingModal({ item, onClose }: any) {
           />
           <div className="flex flex-col divide-y divide-gray-300 flex-1">
             <div className="flex flex-col gap-1 pb-6">
-              <div className="text-2xl font-[500]">{item.brand}</div>
+              <div className="text-2xl font-[500]">{item.brand.name}</div>
               <div className="text-md text-gray-400">{item.name}</div>
               <div className="text-md">
                 ${parseFloat(item.price).toFixed(2)}
@@ -76,25 +75,25 @@ export default function ClothingModal({ item, onClose }: any) {
             </div>
             <div className="py-6 w-full flex">
               <div className="flex-1">Materials</div>
-              <div className="text-gray-400">100% Cotton</div>
+              <div className="text-gray-400">{item.material}</div>
             </div>
-            <div className="py-6">
-              <button className="flex bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors items-center gap-2">
+            <div className="py-6 flex">
+              <Link href={item.brand.website} className="flex bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors items-center gap-2">
                 <div>View on site</div>
                 <OpenExternally />
-              </button>
+              </Link>
             </div>
           </div>
         </div>
         <div className="flex flex-col mt-6 gap-4">
           <div className="flex">
-            <div className="text-lg flex-1">About {item.brand}</div>
+            <div className="text-lg flex-1">About {item.brand.name}</div>
             <div className="flex">
               <Link
-                href={`/brands/${item.brand}`}
+                href={`/brands/${item.brand.id}`}
                 className="underline cursor-pointer"
               >
-                View {item.brand}
+                View {item.brand.name}
               </Link>
               <span className="ml-2">→</span>
             </div>
@@ -109,11 +108,7 @@ export default function ClothingModal({ item, onClose }: any) {
             ))}
           </div>
           <div className="text-[#1D1D1D]">
-            Patagonia, Inc. is an American retailer of outdoor
-            recreation clothing, equipment, and food. It was founded by Yvon
-            Chouinard in 1973 and is based in Ventura, California. Patagonia
-            operates stores in over ten countries, and factories in 16
-            countries.
+            {item.brand.description}
           </div>
         </div>
       </div>

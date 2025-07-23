@@ -7,6 +7,10 @@ import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import ClothingItem from "@/components/items/ClothingItem";
+import useQuery from "@/actions/db/useQuery";
+import Spinner from "@/components/ui/spinner";
+import { getBrands, getClothing } from "@/actions/db/queries";
+
 
 function FilterOption({
   option,
@@ -127,45 +131,18 @@ export default function SearchItemPage() {
   const params = useSearchParams();
   const query = params.get("query");
 
-  const testShirt = {
-    name: "Test shirt",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJOPMTiNIRTx_BoHay_KM1AhGax4HYEItsUQ&s",
-    brand: "Test brand",
-    color: "Black",
-    price: 19.99,
-    sustainabilityType: "Organic",
-    material: "Cotton",
-    occasion: "Casual",
-  };
+  const { data, loading, error } = useQuery(getClothing);
 
-  const [results, setResults] = useState([
-    testShirt,
-    testShirt,
-    testShirt,
-    testShirt,
-    testShirt,
-    testShirt,
-    testShirt,
-    testShirt,
-    testShirt,
-    testShirt,
-    {
-      name: "Special shirt",
-      brand: "Special brand",
-      image:
-        "https://thelomasbrand.com/cdn/shop/files/Elijo_tee_white_flat.jpg?v=1730315943",
-      color: "White",
-      price: 24.99,
-      sustainabilityType: "Recycled",
-      material: "Linen",
-      occasion: "Formal",
-    },
-  ]);
+  const [results, setResults] = useState(data || []);
+
+  //kinda hackey workaround.
+  useMemo(() => {
+    console.log(data);
+    setResults(data || []);
+  }, [data]);
 
   const { filters, setFilters } = useFilters();
   const displayedResults = useMemo(() => {
-    console.log(filters);
     return results.filter((item) => {
       // Check if item matches ALL active filters
       return Object.entries(filters).every(([key, filterValues]) => {
@@ -207,10 +184,6 @@ export default function SearchItemPage() {
     });
     setFilters(defaultFilters);
   }
-
-  useEffect(() => {
-    sortByPriceLowToHigh();
-  }, []);
 
   return (
     <div className="w-[80%] mr-auto ml-auto mt-16 min-h-screen grid grid-cols-[1fr_3fr] gap-8">
@@ -263,7 +236,17 @@ export default function SearchItemPage() {
           </div>
         </div>
         <div className="grid grid-cols-3 gap-4">
-          {displayedResults.map((result, index) => (
+          {loading && (
+            <div className="col-span-3 text-center text-gray-500 h-32 grid place-items-center">
+              <Spinner />
+            </div>
+          )}
+          {error && (
+            <div className="col-span-3 text-center text-red-500 h-32 grid place-items-center">
+              Something went wrong fetching the results. Please try again later.
+            </div>
+          )}
+          {!loading && !error && displayedResults.map((result, index) => (
             <ClothingItem item={result} key={index} />
           ))}
           {displayedResults.length === 0 && (
@@ -276,3 +259,42 @@ export default function SearchItemPage() {
     </div>
   );
 }
+
+
+
+
+  // const testShirt = {
+  //   name: "Test shirt",
+  //   image:
+  //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJOPMTiNIRTx_BoHay_KM1AhGax4HYEItsUQ&s",
+  //   brand: "Test brand",
+  //   color: "Black",
+  //   price: 19.99,
+  //   sustainabilityType: "Organic",
+  //   material: "Cotton",
+  //   occasion: "Casual",
+  // };
+
+  // const [results, setResults] = useState([
+  //   testShirt,
+  //   testShirt,
+  //   testShirt,
+  //   testShirt,
+  //   testShirt,
+  //   testShirt,
+  //   testShirt,
+  //   testShirt,
+  //   testShirt,
+  //   testShirt,
+  //   {
+  //     name: "Special shirt",
+  //     brand: "Special brand",
+  //     image:
+  //       "https://thelomasbrand.com/cdn/shop/files/Elijo_tee_white_flat.jpg?v=1730315943",
+  //     color: "White",
+  //     price: 24.99,
+  //     sustainabilityType: "Recycled",
+  //     material: "Linen",
+  //     occasion: "Formal",
+  //   },
+  // ]);

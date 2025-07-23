@@ -40,20 +40,19 @@ const uncutsans = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://full-stack-store.vercel.app"),
-  title: "Full-Stack-Kit - Full Stack Next.js Template",
+  title: "Wear to find - sustainable shopping",
   description:
-    "Ship your next full stack app with ease. Full-Stack-Kit includes all necessary but time-consuming features to help you get started and focus on the main logic of your app.",
-  icons: [{ url: "/favicon.ico" }],
+    "Find the brands and products you need, with the values you love.",
+  icons: [{ url: "/Union.svg" }],
   twitter: {
     card: "summary_large_image",
-    site: "@full_stack_kit",
-    creator: "@full_stack_kit",
+    site: "@wear_to_find",
+    creator: "@wear_to_find",
   },
   openGraph: {
-    title: "Full-Stack-Kit - Full Stack Next.js Template",
+    title: "Wear to find - sustainable shopping",
     description:
-      "Ship your next full stack app with ease. Full-Stack-Kit includes all necessary but time-consuming features to help you get started and focus on the main logic of your app.",
+      "Find the brands and products you need, with the values you love.",
   },
 };
 
