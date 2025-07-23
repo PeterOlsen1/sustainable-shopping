@@ -14,6 +14,7 @@ export default function useQuery(
       setError(null); // Reset error state
       try {
         const resp = await query();
+        console.log(resp);
         setData(resp);
       } catch (err) {
         console.log(err);

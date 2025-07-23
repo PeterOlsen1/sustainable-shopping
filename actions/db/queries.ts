@@ -104,6 +104,7 @@ export async function getBrands() {
   const brands = await prisma?.brand.findMany({
     orderBy: { name: "asc" },
   });
+  console.log(brands);
 
   return brands.map((brand) => ({
     ...brand,

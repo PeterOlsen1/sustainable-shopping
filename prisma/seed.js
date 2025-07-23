@@ -93,6 +93,23 @@ async function main() {
     console.log(`Inserted clothing item: ${item.type}`);
   }
 
+  //insert user roles
+  const adminRole = await prisma.role.upsert({
+    where: { name: 'admin' },
+    update: {},
+    create: {
+      name: 'admin',
+    },
+  });
+
+  const userRole = await prisma.role.upsert({
+    where: { name: 'user' },
+    update: {},
+    create: {
+      name: 'user',
+    },
+  });
+
   console.log("✅ Seed complete.");
 }
 

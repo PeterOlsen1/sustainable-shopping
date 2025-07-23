@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("POSTGRES_DATABASE_URL")
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
 }
 
 model Role {
@@ -97,15 +97,16 @@ model Post {
   updatedAt DateTime @updatedAt
 }
 
+// SQLite doesn't support arrays of primitive types (weird?) so we store as JSON string
 model Brand {
   id             Int      @id @default(autoincrement())
   name           String
   website        String
   description    String
-  clothingTypes  String // Store as JSON string: '["shirts", "pants", "jackets"]'
-  knownFor       String // Store as JSON string: '["sustainability", "quality"]'
+  clothingTypes  String   // Store as JSON string: '["shirts", "pants", "jackets"]'
+  knownFor       String   // Store as JSON string: '["sustainability", "quality"]'
   imageURL       String   @default("")
-  rating         Decimal  @db.Decimal(3,2) // Specify precision for PostgreSQL
+  rating         Decimal
   clothing       Clothing[] // Backrelation to Clothing
   createdAt      DateTime @default(now())
 }
@@ -114,12 +115,12 @@ model Clothing {
   id          Int      @id @default(autoincrement())
   type        String   
   material    String
-  price       Decimal  @db.Decimal(10,2) // Specify precision for PostgreSQL (up to 99999999.99)
+  price		    Decimal
   brandId     Int
   imageURL    String   @default("")
   brand       Brand    @relation(fields: [brandId], references: [id])
   createdAt   DateTime @default(now())
 }
 
-// npx prisma db push
-// npx prisma generate
+// npx prisma generate --schema=prisma/schema.dev.prisma
+// npx prisma db push --schema=prisma/schema.dev.prisma
