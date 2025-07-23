@@ -26,7 +26,7 @@ export default function PageStepper({
           fill="black"
         />
       </svg>
-      {[...Array(totalPages).keys()].map((i) => (
+      {Array.from({ length: totalPages }, (_, i) => (
         <button
           key={i}
           className={`mx-1 px-2 py-1 rounded-full select-none ${currentPage === i ? "bg-black text-white" : ""}`}
