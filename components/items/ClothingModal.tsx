@@ -78,7 +78,10 @@ export default function ClothingModal({ item, onClose }: any) {
               <div className="text-gray-400">{item.material}</div>
             </div>
             <div className="py-6 flex">
-              <Link href={item.brand.website} className="flex bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors items-center gap-2">
+              <Link
+                href={item.brand.website}
+                className="flex bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors items-center gap-2"
+              >
                 <div>View on site</div>
                 <OpenExternally />
               </Link>
@@ -103,9 +106,7 @@ export default function ClothingModal({ item, onClose }: any) {
               <ItemBubble key={index} text={text} />
             ))}
           </div>
-          <div className="text-[#1D1D1D]">
-            {item.brand.description}
-          </div>
+          <div className="text-[#1D1D1D]">{item.brand.description}</div>
         </div>
       </div>
     </div>

@@ -86,7 +86,9 @@ export default function Home() {
     <div className="w-screen h-full min-h-[80vh] flex flex-col items-center justify-center relative">
       <>
         <div className="text-4xl font-bold text-center mb-12">
-          Find the brands and products you need,<br />with the values you love.
+          Find the brands and products you need,
+          <br />
+          with the values you love.
         </div>
         <div className="w-[50vw] min-w-[300px] mb-10">
           <SearchBar type={"item"} className={"py-4"} />

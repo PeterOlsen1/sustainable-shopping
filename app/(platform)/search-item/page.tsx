@@ -11,7 +11,6 @@ import useQuery from "@/actions/db/useQuery";
 import Spinner from "@/components/ui/spinner";
 import { getBrands, getClothing } from "@/actions/db/queries";
 
-
 function FilterOption({
   option,
   filters,
@@ -246,9 +245,11 @@ export default function SearchItemPage() {
               Something went wrong fetching the results. Please try again later.
             </div>
           )}
-          {!loading && !error && displayedResults.map((result, index) => (
-            <ClothingItem item={result} key={index} />
-          ))}
+          {!loading &&
+            !error &&
+            displayedResults.map((result, index) => (
+              <ClothingItem item={result} key={index} />
+            ))}
           {displayedResults.length === 0 && (
             <div className="col-span-3 text-center text-gray-500 h-32 grid place-items-center">
               No results found!
@@ -260,41 +261,38 @@ export default function SearchItemPage() {
   );
 }
 
+// const testShirt = {
+//   name: "Test shirt",
+//   image:
+//     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJOPMTiNIRTx_BoHay_KM1AhGax4HYEItsUQ&s",
+//   brand: "Test brand",
+//   color: "Black",
+//   price: 19.99,
+//   sustainabilityType: "Organic",
+//   material: "Cotton",
+//   occasion: "Casual",
+// };
 
-
-
-  // const testShirt = {
-  //   name: "Test shirt",
-  //   image:
-  //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJOPMTiNIRTx_BoHay_KM1AhGax4HYEItsUQ&s",
-  //   brand: "Test brand",
-  //   color: "Black",
-  //   price: 19.99,
-  //   sustainabilityType: "Organic",
-  //   material: "Cotton",
-  //   occasion: "Casual",
-  // };
-
-  // const [results, setResults] = useState([
-  //   testShirt,
-  //   testShirt,
-  //   testShirt,
-  //   testShirt,
-  //   testShirt,
-  //   testShirt,
-  //   testShirt,
-  //   testShirt,
-  //   testShirt,
-  //   testShirt,
-  //   {
-  //     name: "Special shirt",
-  //     brand: "Special brand",
-  //     image:
-  //       "https://thelomasbrand.com/cdn/shop/files/Elijo_tee_white_flat.jpg?v=1730315943",
-  //     color: "White",
-  //     price: 24.99,
-  //     sustainabilityType: "Recycled",
-  //     material: "Linen",
-  //     occasion: "Formal",
-  //   },
-  // ]);
+// const [results, setResults] = useState([
+//   testShirt,
+//   testShirt,
+//   testShirt,
+//   testShirt,
+//   testShirt,
+//   testShirt,
+//   testShirt,
+//   testShirt,
+//   testShirt,
+//   testShirt,
+//   {
+//     name: "Special shirt",
+//     brand: "Special brand",
+//     image:
+//       "https://thelomasbrand.com/cdn/shop/files/Elijo_tee_white_flat.jpg?v=1730315943",
+//     color: "White",
+//     price: 24.99,
+//     sustainabilityType: "Recycled",
+//     material: "Linen",
+//     occasion: "Formal",
+//   },
+// ]);
