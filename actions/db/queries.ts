@@ -72,11 +72,6 @@ export async function updateClothingItem(
     ...(data.imageURL ? { imageURL: data.imageURL } : {}),
   };
 
-  // // Only add imageURL if it's provided and not empty
-  // if (data.imageURL && data.imageURL.trim() !== "") {
-  //   updateData.imageURL = data.imageURL;
-  // }
-
   return await prisma?.clothing.update({
     where: { id },
     data: updateData,
@@ -87,7 +82,11 @@ export async function updateClothingItem(
 export async function getClothingByQuery(query: string) {
   const clothes = await prisma?.clothing.findMany({
     where: {
-      OR: [{ material: { contains: query } }, { type: { contains: query } }],
+      OR: [
+        { material: { contains: query } },
+        { type: { contains: query } },
+        { name: { contains: query } }
+      ],
     },
     orderBy: { price: "asc" },
   });
