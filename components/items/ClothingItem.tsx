@@ -98,7 +98,7 @@ export default function ClothingItem({
         </div>
         <div className="mt-2">
           <div className="text-lg font-bold">{item.brand.name}</div>
-          <div className="text-md text-gray-400">{item.type}</div>
+          <div className="text-md text-gray-400">{item.name}</div>
           <div className="text-md">${parseFloat(item.price).toFixed(2)}</div>
         </div>
       </div>

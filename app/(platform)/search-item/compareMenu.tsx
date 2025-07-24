@@ -209,17 +209,26 @@ export default function CompareMenu({
                 />
               ))}
             </div>
-            {selectedItems.length > 0 && (
-              <div className="flex-1 flex justify-end items-end">
-                <button
-                  onClick={() => setLargeCompareOpen(true)}
-                  className="bg-black hover:bg-gray-800 text-white px-6 py-3 rounded-lg font-medium transition-colors"
-                >
-                  Compare {selectedItems.length} Item
-                  {selectedItems.length !== 1 ? "s" : ""}
-                </button>
-              </div>
-            )}
+            <div className="flex-1 flex justify-end items-end">
+            <button
+                onClick={() => setLargeCompareOpen(true)}
+                className={(selectedItems.length >= 2 ? (
+                    `bg-black hover:bg-gray-800 text-white`
+                ) : (`bg-gray-200 text-gray-400 cursor-not-allowed`)) + ' px-6 py-3 rounded-lg font-medium transition-colors'}
+            >
+                {selectedItems.length >= 2 ? (
+                    <div>
+                        Compare {selectedItems.length} Item
+                        {selectedItems.length !== 1 ? "s" : ""}
+                    </div>
+                ) : (
+                    <div>
+                        Add {2 - selectedItems.length} more item
+                        {selectedItems.length == 2 ? "s" : ""} to compare
+                    </div>
+                )}
+            </button>
+            </div>
           </div>
         </div>
       </div>

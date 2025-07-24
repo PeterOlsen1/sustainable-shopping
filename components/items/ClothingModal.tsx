@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import OpenExternally from "../ui/open-externally";
+import Colors from "./Colors";
 
 const shirt = {
   name: "T-shirt name",
@@ -28,7 +29,7 @@ export default function ClothingModal({ item, onClose }: any) {
         className="bg-white w-[65%] rounded-lg shadow relative top-[-5%] p-6 pr-10 pb-10 flex flex-col gap-4"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="absolute top-6 right-6" onClick={onClose}>
+        <div className="absolute top-6 right-6 cursor-pointer" onClick={onClose}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -69,9 +70,8 @@ export default function ClothingModal({ item, onClose }: any) {
               </div>
             </div>
             <div className="py-6">
-              <div className="font-[400]">Colors</div>
-              <div>Some color boxes here</div>
-              <div className="text-gray-400">Selected Color</div>
+              <div className="font-[400] mb-2">Colors</div>
+              <Colors selectable />
             </div>
             <div className="py-6 w-full flex">
               <div className="flex-1">Materials</div>

@@ -1,16 +1,17 @@
 ### Future
 
 - Clean up extra routes, files, images, etc.
-- Fill more data
+
+### Actual implementation
 - Mobile design
+- Make user ratings
+- Make colors
 
 ### Now
 
-- Update clothing item, update brand ID
+- Comparison?
+  - Fake user ratings
 - Finish home page
   - Popular searches
-- Comparison?
-- Color options
-- Fake user ratings
 - Favicons / titles
 - Dynamic filter generation
