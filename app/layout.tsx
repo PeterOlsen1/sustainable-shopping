@@ -43,7 +43,11 @@ export const metadata: Metadata = {
   title: "Wear to find | Sustainable Shopping",
   description:
     "Find the brands and products you need, with the values you love.",
-  icons: [{ url: "/images/favicon.ico" }],
+  icons: {
+    icon: '/favicon-16x16.png',
+    shortcut: '/favicon-16x16.png',
+    apple: '/favicon.png',
+  },
   twitter: {
     card: "summary_large_image",
     site: "@wear_to_find",
