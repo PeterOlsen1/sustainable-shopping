@@ -1,5 +1,6 @@
 export default function setHead(title: string, description: string) {
-  document.title = title;
+  if (typeof window !== "undefined") {
+    document.title = title;
 
   let metaDescription = document.querySelector('meta[name="description"]');
   if (!metaDescription) {
@@ -7,5 +8,6 @@ export default function setHead(title: string, description: string) {
     metaDescription.setAttribute("name", "description");
     document.head.appendChild(metaDescription);
   }
-  metaDescription.setAttribute("content", description);
+    metaDescription.setAttribute("content", description);
+  }
 }
