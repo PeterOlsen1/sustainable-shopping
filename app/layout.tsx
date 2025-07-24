@@ -40,7 +40,7 @@ const uncutsans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Wear to find - sustainable shopping",
+  title: "Wear to find | Sustainable Shopping",
   description:
     "Find the brands and products you need, with the values you love.",
   icons: [{ url: "/Union.svg" }],
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     creator: "@wear_to_find",
   },
   openGraph: {
-    title: "Wear to find - sustainable shopping",
+    title: "Wear to find | Sustainable Shopping",
     description:
       "Find the brands and products you need, with the values you love.",
   },

@@ -22,7 +22,6 @@ const appConfig: AppConfig = {
     signin: "/signin",
     signout: "/signout",
     register: "/register",
-    dashboard: "/dashboard",
     account: "/account",
   },
 

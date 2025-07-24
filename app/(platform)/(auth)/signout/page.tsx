@@ -4,8 +4,8 @@ import PlatformPageContainer from "@/components/platform-page-container";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Full-Stack-Kit - Sign out",
-  description: "Sign out of Full-Stack-Kit.",
+  title: "Sustainable Shopping | Sign out",
+  description: "Sign out of Sustainable Shopping.",
 };
 
 export default async function Page() {

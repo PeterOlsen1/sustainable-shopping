@@ -15,7 +15,6 @@ export interface AppConfig {
     signin: string;
     signout: string;
     register: string;
-    dashboard: string;
     account: string;
   };
 

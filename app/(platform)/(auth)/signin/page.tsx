@@ -5,8 +5,8 @@ import SignInView from "@/components/views/signin";
 import PlatformPageContainer from "@/components/platform-page-container";
 
 export const metadata: Metadata = {
-  title: "Full-Stack-Kit - Sign In",
-  description: "Sign in to Full-Stack-Kit.",
+  title: "Sustainable Shopping | Sign In",
+  description: "Sign in to Sustainable Shopping.",
 };
 
 export default async function Page() {

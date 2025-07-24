@@ -9,8 +9,6 @@
 
 ### Now
 
-- Comparison?
-  - Fake user ratings
 - Finish home page
   - Popular searches
 - Favicons / titles

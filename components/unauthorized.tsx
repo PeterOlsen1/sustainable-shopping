@@ -22,7 +22,7 @@ export default function Unauthorized() {
         </CardHeader>
         <CardFooter className="flex justify-center">
           <Button asChild>
-            <Link href={appConfig.pages.dashboard}>Go Back</Link>
+            <Link href={appConfig.pages.index}>Go Back</Link>
           </Button>
         </CardFooter>
       </Card>
