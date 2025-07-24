@@ -13,6 +13,7 @@ export default function UpdateItemPage({ params }: any) {
   const itemId = params.id;
 
   const [formData, setFormData] = useState({
+    name: "",
     type: "",
     material: "",
     price: "",
@@ -40,6 +41,7 @@ export default function UpdateItemPage({ params }: any) {
           getClothingById(parseInt(itemId)),
           getBrands(),
         ]);
+        console.log(clothingItem);
 
         if (!clothingItem) {
           setMessage("Clothing item not found");
@@ -49,6 +51,7 @@ export default function UpdateItemPage({ params }: any) {
 
         setBrands(brandsData);
         setFormData({
+          name: (clothingItem as any).name || "",
           type: clothingItem.type,
           material: clothingItem.material,
           price: clothingItem.price.toString(),
@@ -119,6 +122,26 @@ export default function UpdateItemPage({ params }: any) {
 
         <div className="bg-white rounded-lg shadow-md p-6">
           <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Name Field */}
+            <div>
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Product Name *
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                placeholder="e.g. Monica Cotton Shirt Citra, Classic Denim Jacket"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
             {/* Type Field */}
             <div>
               <label

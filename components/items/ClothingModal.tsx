@@ -55,7 +55,7 @@ export default function ClothingModal({ item, onClose }: any) {
         <div className="flex gap-6">
           <Image
             src={item.imageURL}
-            alt={item.name}
+            alt={item.name || "clothing item"}
             width={400}
             height={400}
             className="rounded-lg object-cover"

@@ -1,11 +1,15 @@
 "use client";
 
-import { addClothingItem, addBrand } from "@/actions/db/queries";
-import { useState } from "react";
+import { addClothingItem, addBrand, getBrands } from "@/actions/db/queries";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function AdminPage() {
+  const [brands, setBrands] = useState<any[]>([]);
+  const [loadingBrands, setLoadingBrands] = useState(true);
+
   const [clothingFormData, setClothingFormData] = useState({
+    name: "",
     type: "",
     material: "",
     price: "",
@@ -28,6 +32,22 @@ export default function AdminPage() {
   const [clothingMessage, setClothingMessage] = useState("");
   const [brandMessage, setBrandMessage] = useState("");
 
+  // Fetch brands when component mounts
+  useEffect(() => {
+    const fetchBrands = async () => {
+      try {
+        const fetchedBrands = await getBrands();
+        setBrands(fetchedBrands);
+      } catch (error) {
+        console.error("Error fetching brands:", error);
+      } finally {
+        setLoadingBrands(false);
+      }
+    };
+
+    fetchBrands();
+  }, []);
+
   const handleClothingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmittingClothing(true);
@@ -38,6 +58,7 @@ export default function AdminPage() {
 
       setClothingMessage("Clothing item added successfully!");
       setClothingFormData({
+        name: "",
         type: "",
         material: "",
         price: "",
@@ -74,6 +95,10 @@ export default function AdminPage() {
         rating: "",
         imageURL: "",
       });
+
+      // Refetch brands after adding a new one
+      const fetchedBrands = await getBrands();
+      setBrands(fetchedBrands);
     } catch (error) {
       setBrandMessage("Error adding brand");
       console.error(error);
@@ -288,6 +313,26 @@ export default function AdminPage() {
           </h2>
 
           <form onSubmit={handleClothingSubmit} className="space-y-4">
+            {/* Name Field */}
+            <div>
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Product Name *
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={clothingFormData.name}
+                onChange={handleClothingChange}
+                required
+                placeholder="e.g. Monica Cotton Shirt Citra, Classic Denim Jacket"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
             {/* Type Field */}
             <div>
               <label
@@ -350,25 +395,35 @@ export default function AdminPage() {
               />
             </div>
 
-            {/* Brand ID Field */}
+            {/* Brand Selection Field */}
             <div>
               <label
                 htmlFor="brandId"
                 className="block text-sm font-medium text-gray-700 mb-1"
               >
-                Brand ID *
+                Brand *
               </label>
-              <input
-                type="number"
-                id="brandId"
-                name="brandId"
-                value={clothingFormData.brandId}
-                onChange={handleClothingChange}
-                required
-                min="1"
-                placeholder="e.g. 1, 2, 3"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
+              {loadingBrands ? (
+                <div className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-500">
+                  Loading brands...
+                </div>
+              ) : (
+                <select
+                  id="brandId"
+                  name="brandId"
+                  value={clothingFormData.brandId}
+                  onChange={handleClothingChange}
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="">Select a brand...</option>
+                  {brands.map((brand) => (
+                    <option key={brand.id} value={brand.id}>
+                      {brand.name}
+                    </option>
+                  ))}
+                </select>
+              )}
             </div>
 
             {/* Image URL Field */}

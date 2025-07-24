@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 function AdditionalResource({ href, label }: { href: string; label: string }) {
   return (
@@ -17,13 +18,19 @@ export default function TopCard({ brand, brandPage = true }: { brand: any, brand
       <Image
         src={brand.imageURL}
         alt={brand.name}
-        width={brandPage ? 250 : 150}
-        height={brandPage ? 200 : 100}
+        width={250}
+        height={220}
         className="rounded-lg object-cover"
       />
       <div className="flex flex-col h-full flex-1 gap-10 justify-between">
         <div className="flex flex-col flex-1 gap-4">
-          <div className="text-2xl font-bold">{brand.name}</div>
+          {brandPage ? (
+            <div className="text-2xl font-bold">{brand.name}</div>
+          ) : (
+            <Link className="text-2xl underline font-bold" href={`/brands/${brand.id}`}>
+              {brand.name}
+            </Link>
+          )}
           <div>{brand.description || "No description available."}</div>
         </div>
         <div className="flex">
@@ -40,9 +47,9 @@ export default function TopCard({ brand, brandPage = true }: { brand: any, brand
               />
             </div>
           </div>
-          <button className="bg-black text-white rounded px-4 py-2 font-[700]">
+          <Link href={brand.website} className="bg-black text-white rounded px-4 py-2 font-[700] grid place-items-center">
             Go to site →
-          </button>
+          </Link>
         </div>
       </div>
     </div>

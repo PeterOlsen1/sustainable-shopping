@@ -4,6 +4,7 @@ import { Decimal } from "@prisma/client/runtime/library";
 
 interface ClothingItem {
   id: number;
+  name?: string;
   type: string;
   material: string;
   price: Decimal;
@@ -55,9 +56,14 @@ export default async function UpdateItemPage() {
             >
               <div className="space-y-3">
                 <div className="flex justify-between items-start">
-                  <h3 className="text-xl font-semibold text-gray-900 capitalize">
-                    {item.type}
-                  </h3>
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900">
+                      {item.name || "Unnamed Item"}
+                    </h3>
+                    <p className="text-sm text-gray-600 capitalize mt-1">
+                      {item.type}
+                    </p>
+                  </div>
                   <span className="text-lg font-bold text-green-600">
                     ${Number(item.price).toFixed(2)}
                   </span>

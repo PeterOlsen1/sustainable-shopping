@@ -5,12 +5,9 @@ import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import TopCard from "../brands/[brand]/components/TopCard";
 import Spinner from "@/components/ui/spinner";
-import { useRouter } from "next/navigation";
-import { DividerHorizontalIcon } from "@radix-ui/react-icons";
+import setHead from "@/actions/head/setHead";
 
 function BubbleItem({ text, selected, setQuery }: { text: string, selected?: boolean, setQuery: any }) {
-  const router = useRouter();
-
   const handleClick = () => {
     if (text == 'All Brands') {
       setQuery("");
@@ -18,11 +15,12 @@ function BubbleItem({ text, selected, setQuery }: { text: string, selected?: boo
     else {
       setQuery(text);
     }
-    // router.push(`/search-brand?query=${encodeURIComponent(text)}`);
   };
-  
+
+  const bg = selected ? "bg-gray-100" : "bg-white";
+  console.log(bg);
   return (
-    <div className="bg-white text-black p-2 rounded-full text-sm cursor-pointer border border-[#97AAEF] hover:bg-gray-100" onClick={handleClick}>{text}</div>
+    <div className={`text-black p-2 rounded-full text-sm cursor-pointer border border-[#97AAEF] hover:bg-gray-100 ${bg}`} onClick={handleClick}>{text}</div>
   );
 }
 
@@ -51,7 +49,7 @@ export default function SearchItemPage() {
       }));
     });
     return ret;
-  }, [data, params, query]);
+  }, [data, query]);
 
   const importantItemsText = useMemo(() => {
     if (!data) {
@@ -70,12 +68,19 @@ export default function SearchItemPage() {
     return [...Array.from(out), "All Brands"];
   }, [data]);
 
+  if (query) {
+    setHead(`"${query}" | Sustainable Shopping`, `Find sustainable brands known for ${query}`);
+  }
+  else {
+    setHead(`All Brands | Sustainable Shopping`, `Discover sustainable clothing from ethical brands`);
+  }
+
   return (
     <div className="w-[80%] mr-auto ml-auto mt-16 h-screen gap-8">
       <div className="w-full flex flex-col gap-4">
         <div className="flex flex-wrap gap-4">
           {importantItemsText.map((item: any, index: number) => (
-            <BubbleItem text={item} key={index} setQuery={setQuery} />
+            <BubbleItem text={item} key={index} setQuery={setQuery} selected={query === item} />
           ))}
         </div>
         <div className="flex gap-4 justify-center items-center">
@@ -108,7 +113,7 @@ export default function SearchItemPage() {
             </div>
           )}
           {!loading && !error && results.map((result: any, index: number) => (
-            <TopCard brand={result} key={index} />
+            <TopCard brand={result} brandPage={false} key={index} />
           ))}
         </div>
       </div>

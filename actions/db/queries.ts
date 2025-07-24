@@ -55,6 +55,7 @@ export async function getClothingById(id: number) {
 export async function updateClothingItem(
   id: number,
   data: {
+    name: string;
     type: string;
     material: string;
     price: string;
@@ -63,6 +64,7 @@ export async function updateClothingItem(
   },
 ) {
   const updateData: any = {
+    name: data.name,
     type: data.type,
     material: data.material,
     price: parseFloat(data.price),
@@ -144,6 +146,7 @@ export async function getClothingFromBrand(brandId: number) {
 //   createdAt   DateTime @default(now())
 // }
 export async function addClothingItem(data: {
+  name: string;
   type: string;
   material: string;
   price: number;

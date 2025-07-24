@@ -112,6 +112,7 @@ model Brand {
 
 model Clothing {
   id          Int      @id @default(autoincrement())
+  name        String   @default("")
   type        String   
   material    String
   price       Decimal  @db.Decimal(10,2) // Specify precision for PostgreSQL (up to 99999999.99)
