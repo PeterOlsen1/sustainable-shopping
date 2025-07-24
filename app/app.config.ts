@@ -1,6 +1,9 @@
 import { AppConfig } from "@/lib/types";
 import { Role } from "@/lib/types/enums";
 
+const dev = process.env.NODE_ENV == "development";
+const baseUrl = (dev ? process.env.NEXT_PUBLIC_BASE_URL : process.env.NEXT_PUBLIC_BASE_URL_PROD) + '/api';
+
 const appConfig: AppConfig = {
   brand: {
     companyName: "Full Stack Kit LLC.",
@@ -28,7 +31,7 @@ const appConfig: AppConfig = {
   },
 
   api: {
-    baseUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api`,
+    baseUrl: (baseUrl as string),
     sendMail: "/mail/send",
     authProviders: "/auth/providers",
   },
