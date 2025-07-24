@@ -7,12 +7,19 @@ import TopCard from "../brands/[brand]/components/TopCard";
 import Spinner from "@/components/ui/spinner";
 import setHead from "@/actions/head/setHead";
 
-function BubbleItem({ text, selected, setQuery }: { text: string, selected?: boolean, setQuery: any }) {
+function BubbleItem({
+  text,
+  selected,
+  setQuery,
+}: {
+  text: string;
+  selected?: boolean;
+  setQuery: any;
+}) {
   const handleClick = () => {
-    if (text == 'All Brands') {
+    if (text == "All Brands") {
       setQuery("");
-    }
-    else {
+    } else {
       setQuery(text);
     }
   };
@@ -20,7 +27,12 @@ function BubbleItem({ text, selected, setQuery }: { text: string, selected?: boo
   const bg = selected ? "bg-gray-100" : "bg-white";
   console.log(bg);
   return (
-    <div className={`text-black p-2 rounded-full text-sm cursor-pointer border border-[#97AAEF] hover:bg-gray-100 ${bg}`} onClick={handleClick}>{text}</div>
+    <div
+      className={`text-black p-2 rounded-full text-sm cursor-pointer border border-[#97AAEF] hover:bg-gray-100 ${bg}`}
+      onClick={handleClick}
+    >
+      {text}
+    </div>
   );
 }
 
@@ -40,13 +52,16 @@ export default function SearchItemPage() {
     if (!q) {
       return data;
     }
-    
+
     const ret = data?.filter((d: any) => {
-      return (d.knownFor?.some((k: any) => {
-        return k.toLowerCase().includes(q?.toLowerCase());
-      }) || d.clothingItems?.some((c: any) => {
-        return c.toLowerCase().includes(q?.toLowerCase());
-      }));
+      return (
+        d.knownFor?.some((k: any) => {
+          return k.toLowerCase().includes(q?.toLowerCase());
+        }) ||
+        d.clothingItems?.some((c: any) => {
+          return c.toLowerCase().includes(q?.toLowerCase());
+        })
+      );
     });
     return ret;
   }, [data, query]);
@@ -64,15 +79,20 @@ export default function SearchItemPage() {
       //   out.add(t);
       // })
     });
-    
+
     return [...Array.from(out), "All Brands"];
   }, [data]);
 
   if (query) {
-    setHead(`"${query}" | Sustainable Shopping`, `Find sustainable brands known for ${query}`);
-  }
-  else {
-    setHead(`All Brands | Sustainable Shopping`, `Discover sustainable clothing from ethical brands`);
+    setHead(
+      `"${query}" | Sustainable Shopping`,
+      `Find sustainable brands known for ${query}`,
+    );
+  } else {
+    setHead(
+      `All Brands | Sustainable Shopping`,
+      `Discover sustainable clothing from ethical brands`,
+    );
   }
 
   return (
@@ -80,24 +100,21 @@ export default function SearchItemPage() {
       <div className="w-full flex flex-col gap-4">
         <div className="flex flex-wrap gap-4">
           {importantItemsText.map((item: any, index: number) => (
-            <BubbleItem text={item} key={index} setQuery={setQuery} selected={query === item} />
+            <BubbleItem
+              text={item}
+              key={index}
+              setQuery={setQuery}
+              selected={query === item}
+            />
           ))}
         </div>
         <div className="flex gap-4 justify-center items-center">
           <strong className="text-[1.75em]">
-            {query ? (
-              <div>
-                &quot;{query}&quot;
-              </div>
-            ) : (
-              <div>All brands</div>
-            )}
+            {query ? <div>&quot;{query}&quot;</div> : <div>All brands</div>}
           </strong>
           <div className="flex-1">
             {!loading && !error && (
-              <div className="text-gray-500">
-                {results.length} results
-              </div>
+              <div className="text-gray-500">{results.length} results</div>
             )}
           </div>
         </div>
@@ -112,9 +129,11 @@ export default function SearchItemPage() {
               Something went wrong fetching the results. Please try again later.
             </div>
           )}
-          {!loading && !error && results.map((result: any, index: number) => (
-            <TopCard brand={result} brandPage={false} key={index} />
-          ))}
+          {!loading &&
+            !error &&
+            results.map((result: any, index: number) => (
+              <TopCard brand={result} brandPage={false} key={index} />
+            ))}
         </div>
       </div>
     </div>

@@ -16,7 +16,12 @@ function BubbleItem({ text }: { text: string }) {
   };
 
   return (
-    <div className="bg-white text-black p-2 rounded-full text-sm cursor-pointer" onClick={handleClick}>{text}</div>
+    <div
+      className="bg-white text-black p-2 rounded-full text-sm cursor-pointer"
+      onClick={handleClick}
+    >
+      {text}
+    </div>
   );
 }
 
@@ -40,12 +45,12 @@ export default function Home() {
     const out = new Set();
     data.forEach((b: any) => {
       b.knownFor.forEach((k: any) => {
-        out.add(k)
-      })
-    })
-    
+        out.add(k);
+      });
+    });
+
     return Array.from(out);
-  }, [data])
+  }, [data]);
 
   const [exploring, setExploring] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -88,12 +93,14 @@ export default function Home() {
           </div>
           <div className="mb-4">What&apos;s most important to you?</div>
           <div className="w-[40vw] min-w-[300px] flex flex-center flex-wrap gap-2 items-center justify-center">
-            {loading && (
-              <Spinner />
-            )}
-            {!loading && !error && importantItemsText.slice(0, 6).map((text: any, index) => (
-              <BubbleItem key={index} text={text} />
-            ))}
+            {loading && <Spinner />}
+            {!loading &&
+              !error &&
+              importantItemsText
+                .slice(0, 6)
+                .map((text: any, index) => (
+                  <BubbleItem key={index} text={text} />
+                ))}
           </div>
           {/* <div
             className="mt-12 flex flex-col items-center cursor-pointer"

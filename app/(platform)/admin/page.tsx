@@ -81,8 +81,10 @@ export default function AdminPage() {
     try {
       await addBrand({
         ...brandFormData,
-        clothingTypes: brandFormData.clothingTypes.split(',').map(t => t.trim()),
-        knownFor: brandFormData.knownFor.split(',').map(t => t.trim()),
+        clothingTypes: brandFormData.clothingTypes
+          .split(",")
+          .map((t) => t.trim()),
+        knownFor: brandFormData.knownFor.split(",").map((t) => t.trim()),
       });
 
       setBrandMessage("Brand added successfully!");

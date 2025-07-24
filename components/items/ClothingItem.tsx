@@ -10,30 +10,32 @@ interface ClothingItemProps {
   onDragEnd?: () => void;
   selectedItems?: any[];
   setSelectedItems?: (items: any[]) => void;
-  isComparing?: boolean
+  isComparing?: boolean;
 }
 
-export default function ClothingItem({ 
-  item, 
-  onDragStart, 
-  onDragEnd, 
-  selectedItems = [], 
+export default function ClothingItem({
+  item,
+  onDragStart,
+  onDragEnd,
+  selectedItems = [],
   setSelectedItems,
   isComparing,
 }: ClothingItemProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
 
-  const isSelected = selectedItems.some((selectedItem) => selectedItem.id === item.id);
+  const isSelected = selectedItems.some(
+    (selectedItem) => selectedItem.id === item.id,
+  );
 
   const handleDragStart = (e: React.DragEvent) => {
     setIsDragging(true);
     onDragStart?.();
-    
+
     // Set drag data
     e.dataTransfer.setData("application/json", JSON.stringify(item));
     e.dataTransfer.effectAllowed = "copy";
-    
+
     // Create drag preview
     const dragImage = e.currentTarget.cloneNode(true) as HTMLElement;
     dragImage.style.transform = "rotate(5deg)";
@@ -61,8 +63,8 @@ export default function ClothingItem({
 
   return (
     <>
-      <div 
-        className={`flex flex-col relative group ${isDragging ? 'opacity-50' : ''}`}
+      <div
+        className={`flex flex-col relative group ${isDragging ? "opacity-50" : ""}`}
         draggable={!!onDragStart}
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
@@ -73,14 +75,14 @@ export default function ClothingItem({
             onClick={addToCompare}
             disabled={selectedItems.length >= 4 || isSelected}
             className={`absolute top-2 right-2 z-10 px-2 py-1 text-xs rounded-md transition-all opacity-0 group-hover:opacity-100 ${
-              isSelected 
-                ? 'bg-black text-white cursor-default' 
-                : selectedItems.length >= 4 
-                ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
-                : 'bg-white text-black shadow-md hover:shadow-lg cursor-pointer'
+              isSelected
+                ? "bg-black text-white cursor-default"
+                : selectedItems.length >= 4
+                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  : "bg-white text-black shadow-md hover:shadow-lg cursor-pointer"
             }`}
           >
-            {isSelected ? '✓ Added' : 'Compare'}
+            {isSelected ? "✓ Added" : "Compare"}
           </button>
         )}
 
@@ -89,7 +91,7 @@ export default function ClothingItem({
             src={item.imageURL}
             alt={item.name}
             fill
-            className={`rounded object-cover ${!isDragging ? 'cursor-pointer' : 'cursor-grabbing'}`}
+            className={`rounded object-cover ${!isDragging ? "cursor-pointer" : "cursor-grabbing"}`}
             onClick={handleClick}
             style={{ objectFit: "cover" }}
           />
@@ -100,7 +102,7 @@ export default function ClothingItem({
           <div className="text-md">${parseFloat(item.price).toFixed(2)}</div>
         </div>
       </div>
-      
+
       {isOpen && <ClothingModal item={item} onClose={() => setIsOpen(false)} />}
     </>
   );

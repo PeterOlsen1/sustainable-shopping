@@ -8,7 +8,7 @@
 
 - Update clothing item, update brand ID
 - Finish home page
-    - Popular searches
+  - Popular searches
 - Comparison?
 - Color options
 - Fake user ratings

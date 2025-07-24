@@ -11,7 +11,9 @@ import { useMemo, useState } from "react";
 
 function BubbleItem({ text }: { text: string }) {
   return (
-    <div className="bg-white text-black p-2 rounded-full text-sm border border-[#97AAEF]">{text}</div>
+    <div className="bg-white text-black p-2 rounded-full text-sm border border-[#97AAEF]">
+      {text}
+    </div>
   );
 }
 
@@ -75,32 +77,32 @@ export default function BrandPage({ params }: { params: { brand: string } }) {
               </div>
             </div>
             <div>
-          <div>
-            <select
-              name="sort"
-              id=""
-              className="border border-black rounded px-3 py-2 text-sm"
-              onChange={(e) => {
-                if (e.target.value === "price_low_to_high") {
-                  sortByPriceLowToHigh();
-                } else if (e.target.value === "price_high_to_low") {
-                  sortByPriceHighToLow();
-                } else if (e.target.value === "relevance") {
-                  setResults(data.clothing);
-                }
-              }}
-            >
-                <option value="relevance" selected>
-                  Sort by: Relevance
-                </option>
-                <option value="price_low_to_high">
-                  Sort by: Price (low to high)
-                </option>
-                <option value="price_high_to_low">
-                  Sort by: Price (high to low)
-                </option>
-              </select>
-            </div>
+              <div>
+                <select
+                  name="sort"
+                  id=""
+                  className="border border-black rounded px-3 py-2 text-sm"
+                  onChange={(e) => {
+                    if (e.target.value === "price_low_to_high") {
+                      sortByPriceLowToHigh();
+                    } else if (e.target.value === "price_high_to_low") {
+                      sortByPriceHighToLow();
+                    } else if (e.target.value === "relevance") {
+                      setResults(data.clothing);
+                    }
+                  }}
+                >
+                  <option value="relevance" selected>
+                    Sort by: Relevance
+                  </option>
+                  <option value="price_low_to_high">
+                    Sort by: Price (low to high)
+                  </option>
+                  <option value="price_high_to_low">
+                    Sort by: Price (high to low)
+                  </option>
+                </select>
+              </div>
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5">

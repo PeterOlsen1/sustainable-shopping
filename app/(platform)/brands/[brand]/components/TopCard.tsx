@@ -12,7 +12,13 @@ function AdditionalResource({ href, label }: { href: string; label: string }) {
   );
 }
 
-export default function TopCard({ brand, brandPage = true }: { brand: any, brandPage?: boolean}) {
+export default function TopCard({
+  brand,
+  brandPage = true,
+}: {
+  brand: any;
+  brandPage?: boolean;
+}) {
   return (
     <div className="flex gap-8 bg-[#E3E9DA] rounded-lg p-8">
       <Image
@@ -27,7 +33,10 @@ export default function TopCard({ brand, brandPage = true }: { brand: any, brand
           {brandPage ? (
             <div className="text-2xl font-bold">{brand.name}</div>
           ) : (
-            <Link className="text-2xl underline font-bold" href={`/brands/${brand.id}`}>
+            <Link
+              className="text-2xl underline font-bold"
+              href={`/brands/${brand.id}`}
+            >
               {brand.name}
             </Link>
           )}
@@ -47,7 +56,10 @@ export default function TopCard({ brand, brandPage = true }: { brand: any, brand
               />
             </div>
           </div>
-          <Link href={brand.website} className="bg-black text-white rounded px-4 py-2 font-[700] grid place-items-center">
+          <Link
+            href={brand.website}
+            className="bg-black text-white rounded px-4 py-2 font-[700] grid place-items-center"
+          >
             Go to site →
           </Link>
         </div>

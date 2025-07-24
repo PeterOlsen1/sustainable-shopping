@@ -17,10 +17,15 @@ export default function SearchItemPage() {
   const query = params.get("query");
 
   if (query) {
-    setHead(`"${query}" | Sustainable Shopping`, `Find sustainable clothing items with search ${query}`);
-  }
-  else {
-    setHead(`All Items | Sustainable Shopping`, `Discover sustainable clothing from ethical brands`);
+    setHead(
+      `"${query}" | Sustainable Shopping`,
+      `Find sustainable clothing items with search ${query}`,
+    );
+  } else {
+    setHead(
+      `All Items | Sustainable Shopping`,
+      `Discover sustainable clothing from ethical brands`,
+    );
   }
 
   const { data, loading, error } = useQuery(async () => {
@@ -87,10 +92,12 @@ export default function SearchItemPage() {
 
   function removeFilters() {
     //bad + quick solution
-    if (typeof window !== 'undefined') {
-      document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
-        (checkbox as HTMLInputElement).checked = false;
-      });
+    if (typeof window !== "undefined") {
+      document
+        .querySelectorAll('input[type="checkbox"]')
+        .forEach((checkbox) => {
+          (checkbox as HTMLInputElement).checked = false;
+        });
     }
     setFilters(defaultFilters);
   }
@@ -119,7 +126,7 @@ export default function SearchItemPage() {
           onClick={() => router.push("/search-item")}
           className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors"
         >
-          View All 
+          View All
         </button>
       </div>
       <div className="w-full flex flex-col gap-4">
@@ -135,7 +142,8 @@ export default function SearchItemPage() {
               </div>
             )}
           </div>
-          <button className={`bg-gray-300 rounded text-${showCompare ? 'gray-500' : 'black'} ${showCompare ? 'cursor-default' : 'hover:bg-gray-400 cursor-pointer'} px-3 py-2`} 
+          <button
+            className={`bg-gray-300 rounded text-${showCompare ? "gray-500" : "black"} ${showCompare ? "cursor-default" : "hover:bg-gray-400 cursor-pointer"} px-3 py-2`}
             onClick={() => setShowCompare(true)}
           >
             Compare
@@ -181,9 +189,9 @@ export default function SearchItemPage() {
           {!loading &&
             !error &&
             displayedResults.map((result: any, index: number) => (
-              <ClothingItem 
-                item={result} 
-                key={index} 
+              <ClothingItem
+                item={result}
+                key={index}
                 onDragStart={() => setIsDragging(true)}
                 onDragEnd={() => setIsDragging(false)}
                 selectedItems={selectedItems}
@@ -199,7 +207,12 @@ export default function SearchItemPage() {
         </div>
       </div>
       {showCompare && (
-        <CompareMenu selectedItems={selectedItems} setSelectedItems={setSelectedItems} isDragging={isDragging} onClose={() => setShowCompare(false)} />
+        <CompareMenu
+          selectedItems={selectedItems}
+          setSelectedItems={setSelectedItems}
+          isDragging={isDragging}
+          onClose={() => setShowCompare(false)}
+        />
       )}
     </div>
   );
