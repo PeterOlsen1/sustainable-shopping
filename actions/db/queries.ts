@@ -153,6 +153,7 @@ export async function addClothingItem(data: {
   brandId: number;
   imageURL: string;
 }) {
+  console.log(data);
   return await prisma?.clothing.create({
     data,
   });

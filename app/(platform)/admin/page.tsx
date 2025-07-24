@@ -54,7 +54,11 @@ export default function AdminPage() {
     setClothingMessage("");
 
     try {
-      await addClothingItem(clothingFormData as any);
+      const clothingFormUpload = {
+        ...clothingFormData,
+        brandId: parseInt(clothingFormData.brandId),
+      };
+      await addClothingItem(clothingFormUpload as any);
 
       setClothingMessage("Clothing item added successfully!");
       setClothingFormData({
