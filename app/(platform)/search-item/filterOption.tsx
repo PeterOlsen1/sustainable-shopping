@@ -62,10 +62,10 @@ export default function FilterOption({
             gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
           }}
         >
-          {option.options.map((opt, index) => (
+          {option?.options?.map((opt, index) => (
             <div
               key={index}
-              className="text-sm text-start flex gap-2"
+              className="text-sm text-start flex gap-2 h-full align-center items-center"
               style={{
                 gridColumn: "span 1",
                 // If the item is too large, make it span both columns
@@ -103,8 +103,8 @@ export default function FilterOption({
                   whiteSpace: "normal",
                   wordBreak: "break-word",
                   // Example: if label is too long, span both columns
-                  display: opt.length > 20 ? "block" : "inline",
-                  gridColumn: opt.length > 20 ? "span 2" : "span 1",
+                  display: opt?.length > 20 ? "block" : "inline",
+                  gridColumn: opt?.length > 20 ? "span 2" : "span 1",
                 }}
               >
                 {opt}

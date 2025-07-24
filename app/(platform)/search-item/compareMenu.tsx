@@ -16,7 +16,7 @@ export default function CompareMenu({
   isDragging: boolean;
   onClose: () => void;
 }) {
-  const maxHeight = 435;
+  const maxHeight = 450;
   const [height, setHeight] = useState(maxHeight); // Default height
   const [isDragging, setIsDragging] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -185,7 +185,7 @@ export default function CompareMenu({
             <div className="grid grid-cols-4 gap-4">
               {selectedItems.slice(0, 4).map((item: any, index: number) => (
                 <div
-                  className="flex flex-col items-start lg:min-w-[200px] lg:min-h-[300px]"
+                  className="flex flex-col items-start max-w-[200px] lg:min-w-[200px]"
                   key={index}
                 >
                   <div className="flex-1 w-full">

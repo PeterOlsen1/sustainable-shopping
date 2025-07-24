@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useFilters, defaultFilters, filterOptions } from "./useFilters";
+import { useFilters, defaultFilters, constructFilterOptions } from "./useFilters";
 import FilterOption from "./filterOption";
 import { useMemo, useState } from "react";
 import ClothingItem from "@/components/items/ClothingItem";
@@ -102,8 +102,12 @@ export default function SearchItemPage() {
     setFilters(defaultFilters);
   }
 
+  const filterOptions = useMemo(() => {
+    return constructFilterOptions(data);
+  }, [data]);
+
   return (
-    <div className="w-[80%] mr-auto ml-auto mt-16 min-h-screen grid grid-cols-[1fr_4fr] gap-8">
+    <div className="w-[85%] mr-auto ml-auto mt-16 min-h-screen grid grid-cols-[1fr_4fr] gap-8">
       <div className="rounded-lg flex flex-col gap-4">
         <div className="font-[500] text-xl">Filter by</div>
         <div className="divide-y divide-gray-300 flex flex-col">
