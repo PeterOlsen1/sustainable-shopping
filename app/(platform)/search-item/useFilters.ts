@@ -22,7 +22,7 @@ export function constructFilterOptions(items: any[]) {
     material: new Set(),
     brandName: new Set(),
     brandKnownFor: new Set(),
-  }
+  };
 
   console.log(items);
 

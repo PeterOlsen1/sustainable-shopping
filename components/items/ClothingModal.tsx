@@ -30,7 +30,10 @@ export default function ClothingModal({ item, onClose }: any) {
         className="bg-white w-[65%] rounded-lg shadow relative top-[-5%] p-6 pr-10 pb-10 flex flex-col gap-4"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="absolute top-6 right-6 cursor-pointer" onClick={onClose}>
+        <div
+          className="absolute top-6 right-6 cursor-pointer"
+          onClick={onClose}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -80,7 +83,9 @@ export default function ClothingModal({ item, onClose }: any) {
             </div>
             <div className="py-6 w-full flex">
               <div className="flex-1">User rating</div>
-              <div className="text-gray-400"><Rating /></div>
+              <div className="text-gray-400">
+                <Rating />
+              </div>
             </div>
             <div className="py-6 flex">
               <Link

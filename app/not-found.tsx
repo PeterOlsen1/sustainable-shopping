@@ -8,8 +8,8 @@ import {
 
 export const metadata = {
   title: "Sustainable Shopping | Not Found",
-  description: "Page not found."
-}
+  description: "Page not found.",
+};
 
 export default function NotFound() {
   return (

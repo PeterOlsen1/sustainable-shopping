@@ -1,7 +1,11 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useFilters, defaultFilters, constructFilterOptions } from "./useFilters";
+import {
+  useFilters,
+  defaultFilters,
+  constructFilterOptions,
+} from "./useFilters";
 import FilterOption from "./filterOption";
 import { useMemo, useState } from "react";
 import ClothingItem from "@/components/items/ClothingItem";

@@ -85,7 +85,7 @@ export async function getClothingByQuery(query: string) {
       OR: [
         { material: { contains: query } },
         { type: { contains: query } },
-        { name: { contains: query } }
+        { name: { contains: query } },
       ],
     },
     orderBy: { price: "asc" },

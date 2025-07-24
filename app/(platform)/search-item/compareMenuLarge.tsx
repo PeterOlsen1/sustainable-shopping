@@ -15,9 +15,7 @@ const gruppo = Gruppo({
 
 function BubbleItem({ text }: { text: string }) {
   return (
-    <div
-      className="text-black p-2 rounded-full text-sm border border-[#97AAEF]"
-    >
+    <div className="text-black p-2 rounded-full text-sm border border-[#97AAEF]">
       {text}
     </div>
   );
@@ -29,7 +27,7 @@ export default function CompareMenuLarge({ selectedItems, onClose }: any) {
   setHead(
     `Compare Products | Sustainable Shopping`,
     `Compare your selected sustainable clothing items`,
-);
+  );
 
   useEffect(() => {
     // Small delay to ensure the component is mounted before starting animation
@@ -63,61 +61,46 @@ export default function CompareMenuLarge({ selectedItems, onClose }: any) {
       </div>
       <div className="flex flex-col gap-4 relative">
         <div className="flex w-full justify-evenly text-left gap-8">
-        <div className="opacity-0">
-            Brand values
+          <div className="opacity-0">Brand values</div>
+          {selectedItems.map((item: any, index: number) => (
+            <div key={index} className="flex-1 max-w-xs flex gap-4 flex-col">
+              <ClothingItem item={item} />
+            </div>
+          ))}
         </div>
-        {selectedItems.map((item: any, index: number) => (
-          <div key={index} className="flex-1 max-w-xs flex gap-4 flex-col">
-            <ClothingItem item={item} />
-          </div>
-        ))}
-      </div>
-      <div className="flex w-full justify-evenly text-left gap-8">
-        <div className="flex text-bold text-right flex-col whitespace-nowrap gap-8">
+        <div className="flex w-full justify-evenly text-left gap-8">
+          <div className="flex text-bold text-right flex-col whitespace-nowrap gap-8">
             <div className="opacity-0">
-                <button
-                    className="py-2"
-                >
-                    hi
-                </button>
+              <button className="py-2">hi</button>
             </div>
-            <div className="mt-2">
-                Colors
-            </div>
-            <div className="mt-1">
-                Materials
-            </div>
-            <div>
-                User rating
-            </div>
-            <div>
-                Brand values
-            </div>
-        </div>
-        {selectedItems.map((item: any, index: number) => (
-            <div className="max-w-xs flex flex-col divide-y divide-gray-300 gap-4 w-full text-gray-500" key={index + '-bottom'}>
-            <button
-                className="text-white bg-black px-3 py-2 hover:bg-gray-800 cursor-pointer rounded flex gap-2 self-start whitespace-nowrap"
+            <div className="mt-2">Colors</div>
+            <div className="mt-1">Materials</div>
+            <div>User rating</div>
+            <div>Brand values</div>
+          </div>
+          {selectedItems.map((item: any, index: number) => (
+            <div
+              className="max-w-xs flex flex-col divide-y divide-gray-300 gap-4 w-full text-gray-500"
+              key={index + "-bottom"}
             >
+              <button className="text-white bg-black px-3 py-2 hover:bg-gray-800 cursor-pointer rounded flex gap-2 self-start whitespace-nowrap">
                 View on site <OpenExternally />
-            </button>
-                <div className="pt-4">
-                    <Colors />
-                </div>
-                <div className="pt-4">
-                    {item.material}
-                </div>
-                <div className="pt-4">
-                    <Rating />
-                </div>
-                <div className="pt-4 flex flex-wrap gap-2">
-                    {item.brand.knownFor.map((k: string, innerIndex: number) => {
-                        return <BubbleItem text={k} key={`${index}-${innerIndex}`} />;
-                    })}
-                </div>
+              </button>
+              <div className="pt-4">
+                <Colors />
+              </div>
+              <div className="pt-4">{item.material}</div>
+              <div className="pt-4">
+                <Rating />
+              </div>
+              <div className="pt-4 flex flex-wrap gap-2">
+                {item.brand.knownFor.map((k: string, innerIndex: number) => {
+                  return <BubbleItem text={k} key={`${index}-${innerIndex}`} />;
+                })}
+              </div>
             </div>
-        ))}
-      </div>
+          ))}
+        </div>
       </div>
     </div>
   );

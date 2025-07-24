@@ -44,9 +44,9 @@ export const metadata: Metadata = {
   description:
     "Find the brands and products you need, with the values you love.",
   icons: {
-    icon: '/favicon-16x16.png',
-    shortcut: '/favicon-16x16.png',
-    apple: '/favicon.png',
+    icon: "/favicon-16x16.png",
+    shortcut: "/favicon-16x16.png",
+    apple: "/favicon.png",
   },
   twitter: {
     card: "summary_large_image",
