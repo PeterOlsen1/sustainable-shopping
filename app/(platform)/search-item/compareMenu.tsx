@@ -152,7 +152,7 @@ export default function CompareMenu({
   return (
     <>
       <div
-        className={`fixed bottom-0 left-0 w-full z-49 bg-white px-16 rounded-t-lg flex flex-col transition-all duration-300 ease-out ${
+        className={`fixed bottom-0 left-0 w-full z-49 bg-white px-16 rounded-t-lg flex flex-col ${
           isVisible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
         }`}
         style={{

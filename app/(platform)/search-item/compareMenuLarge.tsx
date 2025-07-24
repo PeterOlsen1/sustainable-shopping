@@ -45,7 +45,7 @@ export default function CompareMenuLarge({ selectedItems, onClose }: any) {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-screen h-screen bg-white z-[999] flex flex-col text-center transition-all gap-4 duration-200 ease-out p-16 ${
+      className={`fixed top-0 left-0 w-screen h-screen overflow-y-auto bg-white z-[999] flex flex-col text-center transition-all gap-4 duration-200 ease-out p-16 ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
       style={{
