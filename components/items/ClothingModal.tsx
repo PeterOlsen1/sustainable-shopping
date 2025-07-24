@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import OpenExternally from "../ui/open-externally";
 import Colors from "./Colors";
+import Rating from "./Rating";
 
 const shirt = {
   name: "T-shirt name",
@@ -76,6 +77,10 @@ export default function ClothingModal({ item, onClose }: any) {
             <div className="py-6 w-full flex">
               <div className="flex-1">Materials</div>
               <div className="text-gray-400">{item.material}</div>
+            </div>
+            <div className="py-6 w-full flex">
+              <div className="flex-1">User rating</div>
+              <div className="text-gray-400"><Rating /></div>
             </div>
             <div className="py-6 flex">
               <Link

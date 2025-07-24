@@ -6,6 +6,7 @@ import setHead from "@/actions/head/setHead";
 import { ExternalLinkIcon } from "@radix-ui/react-icons";
 import OpenExternally from "@/components/ui/open-externally";
 import Colors from "@/components/items/Colors";
+import Rating from "@/components/items/Rating";
 
 const gruppo = Gruppo({
   weight: "400",
@@ -107,7 +108,7 @@ export default function CompareMenuLarge({ selectedItems, onClose }: any) {
                     {item.material}
                 </div>
                 <div className="pt-4">
-                    Rating here
+                    <Rating />
                 </div>
                 <div className="pt-4 flex flex-wrap gap-2">
                     {item.brand.knownFor.map((k: string, innerIndex: number) => {
