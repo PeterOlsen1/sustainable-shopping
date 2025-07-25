@@ -18,7 +18,7 @@ export default function CompareMenu({
   onClose: () => void;
 }) {
   const isMobile = useIsMobile();
-  const maxHeight = 460;
+  const maxHeight = 420;
   const [height, setHeight] = useState(maxHeight);
   const [isDragging, setIsDragging] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -129,6 +129,7 @@ export default function CompareMenu({
         style={{
           boxShadow: "0 -4px 8px 0 rgba(0, 0, 0, 0.25)",
           height: `${height}px`,
+          maxHeight: isMobile ? "50vh" : 'auto'
         }}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
@@ -214,8 +215,9 @@ export default function CompareMenu({
                     ${
                       openSlots == 4
                         ? isMobile
-                          ? "w-[100px] h-[150px]"
+                          ? "w-[30vw] h-[35vw]"
                           : "w-[200px] h-[300px]"
+                      : (openSlots >= 2 && isMobile) ? "w-[30vw] h-[35vw]"
                         : "w-full h-full"
                     }
                     `}
