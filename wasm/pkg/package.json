@@ -1,0 +1,16 @@
+{
+  "name": "sustainable_wasm",
+  "type": "module",
+  "description": "A web assembly implementation of similarity score algorithms",
+  "version": "0.1.0",
+  "files": [
+    "sustainable_wasm_bg.wasm",
+    "sustainable_wasm.js",
+    "sustainable_wasm.d.ts"
+  ],
+  "main": "sustainable_wasm.js",
+  "types": "sustainable_wasm.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}

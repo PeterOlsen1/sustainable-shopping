@@ -39,3 +39,4 @@ next-env.d.ts
 #other
 z_notes.txt
 
+wasm/target

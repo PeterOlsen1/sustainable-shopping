@@ -7,7 +7,7 @@ import useQuery from "@/actions/db/useQuery";
 import { getBrandPage } from "@/actions/db/queries";
 import Spinner from "@/components/ui/spinner";
 import setHead from "@/actions/head/setHead";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 function BubbleItem({ text }: { text: string }) {
   return (

@@ -1,0 +1,15 @@
+[package]
+name = "sustainable_wasm"
+description = "A web assembly implementation of similarity score algorithms"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+strsim = "0.11.1"
+wasm-bindgen = "0.2.100"
+regex = "1.0"
+tfidf = "0.3.0"
+
