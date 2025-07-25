@@ -11,7 +11,7 @@ interface ClothingItemProps {
   selectedItems?: any[];
   setSelectedItems?: (items: any[]) => void;
   isComparing?: boolean;
-  clickHandler?: () => void;
+  clickHandler?: () => number;
   isSmall?: boolean;
 }
 

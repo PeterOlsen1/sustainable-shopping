@@ -12,7 +12,7 @@ import { userHasRoles } from "@/lib/auth/helpers";
 import LoginButton from "./login-button";
 import DesktopProfileMenu from "./desktop-profile-menu";
 import { CurrentUser } from "@/actions/users";
-import Logo from "@/components/ui/Logo";
+import Logo from "@/components/ui/logo";
 import { useIsMobile } from "@/lib/hooks";
 import LogoSmall from "../ui/logo-small";
 
