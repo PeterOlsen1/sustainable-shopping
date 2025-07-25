@@ -129,7 +129,7 @@ export default function CompareMenu({
         style={{
           boxShadow: "0 -4px 8px 0 rgba(0, 0, 0, 0.25)",
           height: `${height}px`,
-          maxHeight: isMobile ? "50vh" : 'auto'
+          maxHeight: isMobile ? "50vh" : "auto",
         }}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
@@ -217,8 +217,9 @@ export default function CompareMenu({
                         ? isMobile
                           ? "w-[30vw] h-[35vw]"
                           : "w-[200px] h-[300px]"
-                      : (openSlots >= 2 && isMobile) ? "w-[30vw] h-[35vw]"
-                        : "w-full h-full"
+                        : openSlots >= 2 && isMobile
+                          ? "w-[30vw] h-[35vw]"
+                          : "w-full h-full"
                     }
                     `}
                   onDrop={handleDrop}
