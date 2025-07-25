@@ -97,6 +97,7 @@ export default function Home() {
             {!loading &&
               !error &&
               importantItemsText
+                .filter((t: any) => t.length > 3)
                 .slice(0, 6)
                 .map((text: any, index) => (
                   <BubbleItem key={index} text={text} />

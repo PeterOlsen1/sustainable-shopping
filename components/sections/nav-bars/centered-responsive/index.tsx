@@ -14,7 +14,7 @@ export default function CenteredResponsiveNavbar({ session }: Props) {
   return (
     <header className="relative w-full z-30 text-black py-2">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-12">
+        <div className="flex items-center justify-between gap-4 h-12">
           {/* Logo */}
           <div className="flex-1">
             <Link className="inline-flex" href="/" aria-label="Full-Stack-Kit">
@@ -22,16 +22,7 @@ export default function CenteredResponsiveNavbar({ session }: Props) {
             </Link>
           </div>
 
-          {/* Desktop nav cta link */}
           <div className="flex-1 flex justify-end items-center gap-4">
-            {/* <Link
-              className="font-medium text-sm p-2 px-4 rounded bg-black text-white hover:bg-gray-600 whitespace-nowrap transition duration-250 ease-in-out"
-              href={
-                session ? appConfig.pages.dashboard : appConfig.pages.signin
-              }
-            >
-              {session ? "Home" : "Sign in"}
-            </Link> */}
             {session && (
               <Link
                 className="font-medium text-sm p-2 px-4 rounded bg-black text-white hover:bg-gray-600 whitespace-nowrap transition duration-250 ease-in-out"
@@ -57,9 +48,6 @@ export default function CenteredResponsiveNavbar({ session }: Props) {
               </>
             )}
           </div>
-
-          {/* Mobile menu */}
-          <MobileMenu />
         </div>
       </div>
     </header>
