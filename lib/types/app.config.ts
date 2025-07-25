@@ -36,6 +36,10 @@ export interface AppConfig {
     showConnectedAccountsSection: boolean;
   };
 
+  breakpoints: {
+    mobile: number;
+  },
+
   auth: {
     defaultRoles: Role[];
     providers: {

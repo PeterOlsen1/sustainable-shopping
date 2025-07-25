@@ -4,7 +4,7 @@ import Link from "next/link";
 import MobileMenu from "./mobile-menu";
 import { Session } from "next-auth";
 import appConfig from "@/app/app.config";
-import Logo from "@/components/items/Logo";
+import Logo from "@/components/ui/logo";
 
 interface Props {
   session?: Session | null;

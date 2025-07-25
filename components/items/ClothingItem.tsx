@@ -11,6 +11,8 @@ interface ClothingItemProps {
   selectedItems?: any[];
   setSelectedItems?: (items: any[]) => void;
   isComparing?: boolean;
+  clickHandler?: () => void;
+  isSmall?: boolean;
 }
 
 export default function ClothingItem({
@@ -20,6 +22,8 @@ export default function ClothingItem({
   selectedItems = [],
   setSelectedItems,
   isComparing,
+  clickHandler,
+  isSmall = false,
 }: ClothingItemProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -50,7 +54,13 @@ export default function ClothingItem({
 
   const handleClick = () => {
     if (!isDragging) {
-      setIsOpen(true);
+
+      if (clickHandler && clickHandler()) {
+
+      }
+      else {
+        setIsOpen(true);
+      }
     }
   };
 
@@ -96,11 +106,13 @@ export default function ClothingItem({
             style={{ objectFit: "cover" }}
           />
         </div>
-        <div className="mt-2">
-          <div className="text-lg font-bold">{item.brand.name}</div>
-          <div className="text-md text-gray-400">{item.name}</div>
-          <div className="text-md">${parseFloat(item.price).toFixed(2)}</div>
-        </div>
+        {!isSmall && (
+          <div className="mt-2">
+            <div className="text-lg font-bold">{item.brand.name}</div>
+            <div className="text-md text-gray-400">{item.name}</div>
+            <div className="text-md">${parseFloat(item.price).toFixed(2)}</div>
+          </div>
+        )}
       </div>
 
       {isOpen && <ClothingModal item={item} onClose={() => setIsOpen(false)} />}

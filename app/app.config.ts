@@ -43,6 +43,10 @@ const appConfig: AppConfig = {
     showConnectedAccountsSection: true,
   },
 
+  breakpoints: {
+    mobile: 450,
+  },
+
   auth: {
     defaultRoles: [Role.USER, Role.ADMIN],
     providers: {

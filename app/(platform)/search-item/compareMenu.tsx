@@ -4,6 +4,7 @@ import ClothingItem from "@/components/items/ClothingItem";
 import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import CompareMenuLarge from "./compareMenuLarge";
 import Cross from "@/components/ui/cross";
+import { useIsMobile } from "@/lib/hooks";
 
 export default function CompareMenu({
   selectedItems = [],
@@ -16,8 +17,9 @@ export default function CompareMenu({
   isDragging: boolean;
   onClose: () => void;
 }) {
-  const maxHeight = 450;
-  const [height, setHeight] = useState(maxHeight); // Default height
+  const isMobile = useIsMobile();
+  const maxHeight = 460;
+  const [height, setHeight] = useState(maxHeight);
   const [isDragging, setIsDragging] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const [isDragOver, setIsDragOver] = useState(false);
@@ -121,7 +123,7 @@ export default function CompareMenu({
   if (isDraggingMainPage) {
     return (
       <div
-        className={`fixed bottom-0 left-0 w-full z-49 bg-white p-8 rounded-t-lg grid place-items-center transition-all duration-300 ease-out ${
+        className={`fixed bottom-0 left-0 w-full z-[999] bg-white p-8 rounded-t-lg grid place-items-center transition-all duration-300 ease-out ${
           isVisible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
         } ${isDragOver ? "bg-blue-50" : ""}`}
         style={{
@@ -152,9 +154,10 @@ export default function CompareMenu({
   return (
     <>
       <div
-        className={`fixed bottom-0 left-0 w-full z-49 bg-white px-16 rounded-t-lg flex flex-col ${
+        className={`fixed bottom-0 left-0 w-full z-[998] bg-white px-16 rounded-t-lg flex flex-col ${
           isVisible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
-        }`}
+        }
+        ${isMobile ? "overflow-y-auto scrollbar-hide" : "overflow-y-hidden"}`}
         style={{
           boxShadow: "0 -4px 8px 0 rgba(0, 0, 0, 0.25)",
           height: `${height}px`,
@@ -168,28 +171,34 @@ export default function CompareMenu({
           onClick={handleClose}
         />
         {/* Drag Handle */}
-        <div
-          ref={dragRef}
-          className="w-full py-2 cursor-ns-resize flex justify-center items-center group"
-          onMouseDown={handleMouseDown}
-        >
-          <div className="w-12 h-1 bg-gray-300 rounded-full group-hover:bg-gray-400 transition-colors"></div>
-        </div>
+        {!isMobile && (
+          <div
+            ref={dragRef}
+            className="w-full py-2 cursor-ns-resize flex justify-center items-center group"
+            onMouseDown={handleMouseDown}
+          >
+            <div className="w-12 h-1 bg-gray-300 rounded-full group-hover:bg-gray-400 transition-colors"></div>
+          </div>
+        )}
 
         {/* Content */}
-        <div className="flex-1 overflow-y-hidden pt-2 pb-4 flex flex-col gap-8">
+        <div className={`flex-1 pt-2 pb-4 flex flex-col gap-8`}>
           <div className="text-lg">
             Select up to 4 items to compare ({selectedItems.length}/4)
           </div>
-          <div className="flex">
-            <div className="grid grid-cols-4 gap-4">
+          <div className={`flex ${isMobile && "flex-col gap-2"}`}>
+            <div className={`grid gap-4 
+                ${isMobile ? 
+                  "grid-cols-2" :
+                  "grid-cols-4"
+                }`}>
               {selectedItems.slice(0, 4).map((item: any, index: number) => (
                 <div
                   className="flex flex-col items-start max-w-[200px] lg:min-w-[200px]"
                   key={index}
                 >
                   <div className="flex-1 w-full">
-                    <ClothingItem item={item} />
+                    <ClothingItem item={item} isSmall={isMobile} />
                   </div>
                   <button
                     className="mt-2 bg-gray-200 hover:bg-gray-300 text-black px-3 py-2 rounded text-sm transition-colors"
@@ -202,14 +211,18 @@ export default function CompareMenu({
               {Array.from({ length: openSlots }).map((_, index) => (
                 <div
                   key={`empty-${index}`}
-                  className={`${openSlots == 4 ? "w-[200px] h-[300px]" : "w-full h-full"} bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center text-gray-400 text-sm`}
+                  className={` bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center text-gray-400 text-sm
+                    ${openSlots == 4 ? 
+                      isMobile ? "w-[100px] h-[150px]" : "w-[200px] h-[300px]"
+                    : "w-full h-full"}
+                    `}
                   onDrop={handleDrop}
                   onDragOver={handleDragOver}
                   onDragLeave={handleDragLeave}
                 />
               ))}
             </div>
-            <div className="flex-1 flex justify-end items-end">
+            <div className={`flex-1 flex ${isMobile ? "justify-center items-center" : "justify-end items-end"}`}>
               <button
                 onClick={() => setLargeCompareOpen(true)}
                 className={

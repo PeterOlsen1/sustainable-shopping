@@ -8,6 +8,7 @@ import { getBrandPage } from "@/actions/db/queries";
 import Spinner from "@/components/ui/spinner";
 import setHead from "@/actions/head/setHead";
 import { useEffect, useMemo, useState } from "react";
+import { useIsMobile } from "@/lib/hooks";
 
 function BubbleItem({ text }: { text: string }) {
   return (
@@ -20,6 +21,8 @@ function BubbleItem({ text }: { text: string }) {
 export default function BrandPage({ params }: { params: { brand: string } }) {
   const router = useRouter();
   const brand = params.brand;
+
+  const isMobile = useIsMobile();
 
   const { data, loading, error } = useQuery(() =>
     getBrandPage(parseInt(brand)),
@@ -69,11 +72,11 @@ export default function BrandPage({ params }: { params: { brand: string } }) {
               <BubbleItem key={index} text={k} />
             ))}
           </div>
-          <div className="flex">
+          <div className={`flex ${isMobile && "flex-col gap-4"}`}>
             <div className="flex gap-6 items-center flex-1">
               <div className="text-3xl font-[500]">Available products</div>
               <div className="text-[1.25rem] text-[#767676]">
-                {data.clothing.length} results
+                {data.clothing.length} result{data.clothing.length > 1 && "s"}
               </div>
             </div>
             <div>
@@ -105,7 +108,7 @@ export default function BrandPage({ params }: { params: { brand: string } }) {
               </div>
             </div>
           </div>
-          <div className="grid gap-4 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5">
+          <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5">
             {results.map((item: any) => (
               <ClothingItem
                 key={"clothing-item-" + item.id}

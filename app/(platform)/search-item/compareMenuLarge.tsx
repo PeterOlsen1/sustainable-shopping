@@ -1,12 +1,14 @@
+"use client";
+
 import Cross from "@/components/ui/cross";
 import { useState, useEffect } from "react";
 import { Gruppo } from "next/font/google";
 import ClothingItem from "@/components/items/ClothingItem";
 import setHead from "@/actions/head/setHead";
-import { ExternalLinkIcon } from "@radix-ui/react-icons";
 import OpenExternally from "@/components/ui/open-externally";
 import Colors from "@/components/items/Colors";
 import Rating from "@/components/items/Rating";
+import { useIsMobile } from "@/lib/hooks";
 
 const gruppo = Gruppo({
   weight: "400",
@@ -23,6 +25,7 @@ function BubbleItem({ text }: { text: string }) {
 
 export default function CompareMenuLarge({ selectedItems, onClose }: any) {
   const [isVisible, setIsVisible] = useState(false);
+  const isMobile = useIsMobile();
 
   setHead(
     `Compare Products | Sustainable Shopping`,
@@ -60,7 +63,55 @@ export default function CompareMenuLarge({ selectedItems, onClose }: any) {
         Compare products
       </div>
       <div className="flex flex-col gap-4 relative">
-        <div className="flex w-full justify-evenly text-left gap-8">
+{isMobile ? (
+  <div className="w-full grid grid-cols-2 gap-4">
+    {selectedItems.map((item: any, index: number) => (
+      <div 
+        className="grid grid-rows-subgrid row-span-6 gap-4" 
+        key={index}
+        style={{
+          display: 'grid',
+          gridTemplateRows: 'subgrid',
+          gridRow: 'span 6'
+        }}
+      >
+        {/* Product image - row 1 */}
+        <div className="flex-1 max-w-xs">
+          <ClothingItem item={item} />
+        </div>
+        
+        {/* View button - row 2 */}
+        <button className="text-white bg-black px-3 py-2 hover:bg-gray-800 cursor-pointer rounded flex gap-2 self-start whitespace-nowrap">
+          View on site <OpenExternally />
+        </button>
+        
+        {/* Colors - row 3 */}
+        <div className="border-t border-gray-300 pt-4">
+          <Colors />
+        </div>
+        
+        {/* Material - row 4 */}
+        <div className="border-t border-gray-300 pt-4">
+          {item.material}
+        </div>
+        
+        {/* Rating - row 5 */}
+        <div className="border-t border-gray-300 pt-4">
+          <Rating />
+        </div>
+        
+        {/* Brand values - row 6 */}
+        <div className="border-t border-gray-300 pt-4 flex flex-wrap gap-2">
+          {item.brand.knownFor.map((k: string, innerIndex: number) => {
+            return <BubbleItem text={k} key={`${index}-${innerIndex}`} />;
+          })}
+        </div>
+      </div>
+    ))}
+  </div>
+) : (
+  <>
+          <div className="flex w-full justify-evenly text-left gap-8">
           <div className="opacity-0">Brand values</div>
           {selectedItems.map((item: any, index: number) => (
             <div key={index} className="flex-1 max-w-xs flex gap-4 flex-col">
@@ -101,6 +152,8 @@ export default function CompareMenuLarge({ selectedItems, onClose }: any) {
             </div>
           ))}
         </div>
+        </>
+)}
       </div>
     </div>
   );

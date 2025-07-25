@@ -1,16 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import OpenExternally from "../ui/open-externally";
 import Colors from "./Colors";
 import Rating from "./Rating";
-
-const shirt = {
-  name: "T-shirt name",
-  price: "20",
-  brand: "Patagonia",
-  imageUrl:
-    "https://www.patagonia.com/dw/image/v2/BDJB_PRD/on/demandware.static/-/Sites-patagonia-master/default/dwd33c434f/images/hi-res/38504_NENA.jpg?sw=768&sh=768&sfrm=png&q=95&bgcolor=f3f4ef",
-};
+import { useIsMobile } from "@/lib/hooks";
 
 function ItemBubble({ text }: { text: string }) {
   return (
@@ -21,13 +16,19 @@ function ItemBubble({ text }: { text: string }) {
 }
 
 export default function ClothingModal({ item, onClose }: any) {
+  const isMobile = useIsMobile();
+
   return (
     <div
-      className="fixed top-0 left-0 w-screen h-screen grid place-items-center bg-black bg-opacity-50 z-50"
+      className="fixed top-0 left-0 w-screen h-screen grid place-items-center bg-black bg-opacity-50 z-[1000]"
       onClick={onClose}
     >
       <div
-        className="bg-white w-[65%] rounded-lg shadow relative top-[-5%] p-6 pr-10 pb-10 flex flex-col gap-4"
+        className={`bg-white rounded-lg shadow relative flex flex-col gap-4 ${
+          isMobile 
+            ? "w-full max-h-[90vh] overflow-y-auto p-4" 
+            : "w-[65%] p-6 pr-10 pb-10"
+        }`}
         onClick={(e) => e.stopPropagation()}
       >
         <div
@@ -57,7 +58,7 @@ export default function ClothingModal({ item, onClose }: any) {
             />
           </svg>
         </div>
-        <div className="flex gap-6">
+        <div className={`flex gap-6 ${isMobile && "flex-col"}`}>
           <Image
             src={item.imageURL}
             alt={item.name || "clothing item"}
@@ -78,7 +79,7 @@ export default function ClothingModal({ item, onClose }: any) {
               <Colors selectable />
             </div>
             <div className="py-6 w-full flex">
-              <div className="flex-1">Materials</div>
+              <div className="flex-1 pr-4">Materials</div>
               <div className="text-gray-400">{item.material}</div>
             </div>
             <div className="py-6 w-full flex">
@@ -111,7 +112,7 @@ export default function ClothingModal({ item, onClose }: any) {
               <span className="ml-2">→</span>
             </div>
           </div>
-          <div className="flex gap-4 flex-wrap">
+          <div className="flex gap-2 flex-wrap">
             {item.brand.knownFor.map((text: any, index: any) => (
               <ItemBubble key={index} text={text} />
             ))}
