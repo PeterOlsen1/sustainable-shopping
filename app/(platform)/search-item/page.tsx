@@ -113,12 +113,11 @@ export default function SearchItemPage() {
   }, [data]);
 
   return (
-    <div className={`w-[85%] mr-auto ml-auto min-h-screen gap-8
-      ${isMobile ?
-        "flex flex-col mt-4" :
-        "grid grid-cols-[1fr_4fr] mt-16"
-      }
-    `}>
+    <div
+      className={`w-[85%] mr-auto ml-auto min-h-screen gap-8
+      ${isMobile ? "flex flex-col mt-4" : "grid grid-cols-[1fr_4fr] mt-16"}
+    `}
+    >
       <div className="rounded-lg flex flex-col gap-4">
         <div className="font-[500] text-xl">Filter by</div>
         <div className="divide-y divide-gray-300 flex flex-col">
@@ -131,7 +130,11 @@ export default function SearchItemPage() {
             />
           ))}
         </div>
-        <div className={isMobile ? "flex gap-4 justify-evenly" : "flex flex-col gap-4"}>
+        <div
+          className={
+            isMobile ? "flex gap-4 justify-evenly" : "flex flex-col gap-4"
+          }
+        >
           <button
             onClick={removeFilters}
             className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors w-full"
@@ -147,7 +150,9 @@ export default function SearchItemPage() {
         </div>
       </div>
       <div className="w-full flex flex-col gap-4">
-        <div className={`flex gap-4 justify-center items-center ${isMobile && "flex-col"}`}>
+        <div
+          className={`flex gap-4 justify-center items-center ${isMobile && "flex-col"}`}
+        >
           <div className="flex flex-1 items-center justify-center w-full gap-4">
             <strong className="text-[1.75em]">
               {query ? <div>&quot;{query}&quot;</div> : <div>All Clothes</div>}
@@ -193,7 +198,7 @@ export default function SearchItemPage() {
                   Sort by: Price (high to low)
                 </option>
               </select>
-          </div>
+            </div>
           </div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -207,26 +212,30 @@ export default function SearchItemPage() {
               Something went wrong fetching the results. Please try again later.
             </div>
           )}
-            {!loading &&
+          {!loading &&
             !error &&
             displayedResults.map((result: any, index: number) => (
               <ClothingItem
-              item={result}
-              key={index}
-              onDragStart={() => setIsDragging(true)}
-              onDragEnd={() => setIsDragging(false)}
-              selectedItems={selectedItems}
-              setSelectedItems={setSelectedItems}
-              isComparing={showCompare}
-              {...(showCompare && {
-                clickHandler: () => {
-                if (isMobile && !selectedItems.includes(result) && selectedItems.length < 4) {
-                  setSelectedItems([...selectedItems, result]);
-                  return 1;
-                }
-                return 0;
-                }
-              })}
+                item={result}
+                key={index}
+                onDragStart={() => setIsDragging(true)}
+                onDragEnd={() => setIsDragging(false)}
+                selectedItems={selectedItems}
+                setSelectedItems={setSelectedItems}
+                isComparing={showCompare}
+                {...(showCompare && {
+                  clickHandler: () => {
+                    if (
+                      isMobile &&
+                      !selectedItems.includes(result) &&
+                      selectedItems.length < 4
+                    ) {
+                      setSelectedItems([...selectedItems, result]);
+                      return 1;
+                    }
+                    return 0;
+                  },
+                })}
               />
             ))}
           {!loading && !error && displayedResults.length === 0 && (

@@ -21,11 +21,12 @@ export default function TopCard({
   brand: any;
   brandPage?: boolean;
 }) {
-
   const isMobile = useIsMobile();
 
   return (
-    <div className={`flex gap-8 bg-[#E3E9DA] rounded-lg p-8 ${isMobile && "flex-col"}`}>
+    <div
+      className={`flex gap-8 bg-[#E3E9DA] rounded-lg p-8 ${isMobile && "flex-col"}`}
+    >
       {isMobile ? (
         <div className="relative h-48 w-full">
           <Image

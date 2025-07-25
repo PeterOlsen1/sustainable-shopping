@@ -41,11 +41,7 @@ export default function PlatformNavigation({ session }: Props) {
         <div className="flex h-14 items-center justify-between gap-12">
           <div className="flex items-center">
             <Link href={appConfig.pages.index} className="flex-shrink-0">
-            {isMobile ? (
-              <LogoSmall />
-            ) : (
-              <Logo />
-            )}
+              {isMobile ? <LogoSmall /> : <Logo />}
             </Link>
           </div>
           <div className="flex-1">

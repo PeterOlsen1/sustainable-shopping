@@ -54,11 +54,8 @@ export default function ClothingItem({
 
   const handleClick = () => {
     if (!isDragging) {
-
       if (clickHandler && clickHandler()) {
-
-      }
-      else {
+      } else {
         setIsOpen(true);
       }
     }

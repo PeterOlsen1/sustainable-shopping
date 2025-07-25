@@ -38,7 +38,7 @@ export interface AppConfig {
 
   breakpoints: {
     mobile: number;
-  },
+  };
 
   auth: {
     defaultRoles: Role[];

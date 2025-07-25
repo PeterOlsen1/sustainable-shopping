@@ -25,8 +25,8 @@ export default function ClothingModal({ item, onClose }: any) {
     >
       <div
         className={`bg-white rounded-lg shadow relative flex flex-col gap-4 ${
-          isMobile 
-            ? "w-full max-h-[90vh] overflow-y-auto p-4" 
+          isMobile
+            ? "w-full max-h-[90vh] overflow-y-auto p-4"
             : "w-[65%] p-6 pr-10 pb-10"
         }`}
         onClick={(e) => e.stopPropagation()}

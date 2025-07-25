@@ -187,11 +187,10 @@ export default function CompareMenu({
             Select up to 4 items to compare ({selectedItems.length}/4)
           </div>
           <div className={`flex ${isMobile && "flex-col gap-2"}`}>
-            <div className={`grid gap-4 
-                ${isMobile ? 
-                  "grid-cols-2" :
-                  "grid-cols-4"
-                }`}>
+            <div
+              className={`grid gap-4 
+                ${isMobile ? "grid-cols-2" : "grid-cols-4"}`}
+            >
               {selectedItems.slice(0, 4).map((item: any, index: number) => (
                 <div
                   className="flex flex-col items-start max-w-[200px] lg:min-w-[200px]"
@@ -212,9 +211,13 @@ export default function CompareMenu({
                 <div
                   key={`empty-${index}`}
                   className={` bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center text-gray-400 text-sm
-                    ${openSlots == 4 ? 
-                      isMobile ? "w-[100px] h-[150px]" : "w-[200px] h-[300px]"
-                    : "w-full h-full"}
+                    ${
+                      openSlots == 4
+                        ? isMobile
+                          ? "w-[100px] h-[150px]"
+                          : "w-[200px] h-[300px]"
+                        : "w-full h-full"
+                    }
                     `}
                   onDrop={handleDrop}
                   onDragOver={handleDragOver}
@@ -222,7 +225,9 @@ export default function CompareMenu({
                 />
               ))}
             </div>
-            <div className={`flex-1 flex ${isMobile ? "justify-center items-center" : "justify-end items-end"}`}>
+            <div
+              className={`flex-1 flex ${isMobile ? "justify-center items-center" : "justify-end items-end"}`}
+            >
               <button
                 onClick={() => setLargeCompareOpen(true)}
                 className={
